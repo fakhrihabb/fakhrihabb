@@ -78,9 +78,33 @@ export default function About() {
           {/* Bio Section */}
           <div className="space-y-6">
             <div ref={bioRef} className="glass glass-hover p-8 rounded-2xl">
-              <p className="text-lg text-text-secondary leading-relaxed">
+              <p className="text-lg text-text-secondary leading-relaxed mb-4">
                 {personalInfo.bio}
               </p>
+              <button
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="text-brand-primary font-semibold hover:text-brand-secondary transition-colors duration-300 cursor-pointer inline-flex items-center gap-2 group"
+              >
+                Let's have a chat!
+                <svg
+                  className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </button>
             </div>
 
             {/* Location & Email */}
