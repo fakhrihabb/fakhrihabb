@@ -16,19 +16,19 @@ export default function Projects() {
   useEffect(() => {
     if (!projectsRef.current) return;
 
-    // Animate section title and subtitle with faster delays
+    // Animate section title and subtitle with consistent faster delays
     if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.1 });
-    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.2 });
-    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.3, duration: 0.5 });
+    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.15 });
+    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.2 });
 
     // Simple fade-in for project cards
     setTimeout(() => {
       projectCardsRef.current.forEach((ref, index) => {
         if (ref) {
-          fadeInUp(ref, { delay: index * 0.1 });
+          fadeInUp(ref, { delay: index * 0.05 });
         }
       });
-    }, 400);
+    }, 250);
 
     // Parallax effects for decorative elements
     decorativeElementsRef.current.forEach((element, index) => {

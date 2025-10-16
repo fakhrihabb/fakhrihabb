@@ -74,12 +74,27 @@ export default function SmoothNavigation() {
   }, [isNavVisible]);
 
   const scrollToSection = (sectionId) => {
+    // Special case for 'hero' section - scroll to top of page
+    if (sectionId === 'hero') {
+      if (window.getLenis) {
+        const lenis = window.getLenis();
+        lenis.scrollTo(0, {
+          duration: 1.5,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+      } else {
+        // Fallback to native smooth scrolling
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
+    }
+    
     const section = document.getElementById(sectionId);
     if (section) {
       // Use Lenis for smooth scrolling if available
       if (window.getLenis) {
         const lenis = window.getLenis();
-        lenis.scrollTo(section, { 
+        lenis.scrollTo(section, {
           offset: -80, // Account for fixed nav height
           duration: 1.5,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))

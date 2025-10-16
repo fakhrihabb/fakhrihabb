@@ -18,32 +18,32 @@ export default function About() {
   useEffect(() => {
     if (!aboutRef.current) return;
 
-    // Animate section title with faster delays
+    // Animate section title with consistent faster delays
     if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.1 });
-    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.2, duration: 0.5 });
+    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.15 });
 
     // Animate bio section
-    if (bioRef.current) fadeInLeft(bioRef.current, { delay: 0.3 });
+    if (bioRef.current) fadeInLeft(bioRef.current, { delay: 0.2 });
 
     // Animate contact info
-    if (contactInfoRef.current) fadeInRight(contactInfoRef.current, { delay: 0.4 });
+    if (contactInfoRef.current) fadeInRight(contactInfoRef.current, { delay: 0.25 });
 
     // Animate skills sections with reduced delay
     skillsRefs.current.forEach((ref, index) => {
-      if (ref) fadeInUp(ref, { delay: 0.5 + (index * 0.1) });
+      if (ref) fadeInUp(ref, { delay: 0.3 + (index * 0.05) });
     });
 
     // Animate tech stack title
-    if (techStackTitleRef.current) fadeInUp(techStackTitleRef.current, { delay: 0.8 });
+    if (techStackTitleRef.current) fadeInUp(techStackTitleRef.current, { delay: 0.4 });
 
     // Simple fade-in for tech stack items
     setTimeout(() => {
       techStackRefs.current.forEach((ref, index) => {
         if (ref) {
-          fadeInUp(ref, { delay: index * 0.05 });
+          fadeInUp(ref, { delay: index * 0.03 });
         }
       });
-    }, 900);
+    }, 450);
 
     // Parallax effect for decorative element
     if (decorativeElementRef.current) {

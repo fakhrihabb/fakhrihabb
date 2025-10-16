@@ -16,23 +16,23 @@ export default function Experience() {
   useEffect(() => {
     if (!experienceRef.current) return;
 
-    // Animate section title and subtitle with faster delays
+    // Animate section title and subtitle with consistent faster delays
     if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.1 });
-    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.2 });
-    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.3, duration: 0.5 });
+    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.15 });
+    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.2 });
 
     // Animate timeline line with simple fade-in
     if (timelineLineRef.current) {
-      fadeInUp(timelineLineRef.current, { delay: 0.4, duration: 0.6 });
+      fadeInUp(timelineLineRef.current, { delay: 0.25 });
     }
 
     // Animate timeline items with simpler stagger effect
     if (timelineItemsRef.current.length > 0) {
       const validItems = timelineItemsRef.current.filter(Boolean);
       staggerReveal(validItems, {
-        stagger: 0.15,
-        y: 40,
-        delay: 0.5,
+        stagger: 0.1,
+        y: 30,
+        delay: 0.3,
         scrollTrigger: {
           start: 'top 85%',
         },

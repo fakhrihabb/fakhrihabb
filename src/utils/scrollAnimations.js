@@ -27,7 +27,7 @@ export const fadeInUp = (element, options = {}) => {
   
   const {
     delay = 0,
-    duration = 1,
+    duration = 0.5,
     y = 60,
     ease = 'power3.out',
     scrollTrigger = {},
@@ -71,7 +71,7 @@ export const fadeInLeft = (element, options = {}) => {
   
   const {
     delay = 0,
-    duration = 1,
+    duration = 0.5,
     x = -60,
     ease = 'power3.out',
     scrollTrigger = {},
@@ -114,7 +114,7 @@ export const fadeInRight = (element, options = {}) => {
   
   const {
     delay = 0,
-    duration = 1,
+    duration = 0.5,
     x = 60,
     ease = 'power3.out',
     scrollTrigger = {},
@@ -155,7 +155,7 @@ export const fadeInRight = (element, options = {}) => {
 export const scaleIn = (element, options = {}) => {
   const {
     delay = 0,
-    duration = 1,
+    duration = 0.5,
     scale = 0.8,
     ease = 'back.out(1.7)',
     scrollTrigger = {},
@@ -234,10 +234,10 @@ export const parallax = (element, options = {}) => {
  * Text reveal animation with word-by-word or character-by-character effect
  */
 export const textReveal = (element, options = {}) => {
-  const { 
-    delay = 0, 
-    duration = 1, 
-    stagger = 0.05, 
+  const {
+    delay = 0,
+    duration = 0.5,
+    stagger = 0.03,
     ease = 'power3.out',
     type = 'words', // 'words' or 'chars'
     scrollTrigger = {}
@@ -316,9 +316,9 @@ export const staggerReveal = (elements, options = {}) => {
   
   const {
     delay = 0,
-    duration = 0.8,
-    stagger = 0.15,
-    y = 50,
+    duration = 0.5,
+    stagger = 0.1,
+    y = 30,
     rotation = 0,
     scale = 1,
     ease = 'power3.out',
@@ -458,7 +458,7 @@ export const morphPath = (element, toPath, options = {}) => {
 export const flip3D = (element, options = {}) => {
   const {
     delay = 0,
-    duration = 1,
+    duration = 0.5,
     direction = 'y', // 'x', 'y', or 'z'
     ease = 'power3.inOut',
     scrollTrigger = {},

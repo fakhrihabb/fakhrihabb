@@ -14,11 +14,28 @@ export default function Hero() {
   const scrollIndicatorRef = useRef(null);
   const floatingElementsRef = useRef([]);
 
-  const scrollToAbout = () => {
-    const aboutSection = document.getElementById('about');
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: 'smooth' });
+  const scrollToSection = (sectionId) => {
+    if (window.getLenis) {
+      const lenis = window.getLenis();
+      const section = document.getElementById(sectionId);
+      if (section) {
+        lenis.scrollTo(section, {
+          offset: -80, // Account for fixed nav height
+          duration: 1.5,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+      }
+    } else {
+      // Fallback to native smooth scrolling
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
+  };
+
+  const scrollToAbout = () => {
+    scrollToSection('about');
   };
 
   useEffect(() => {
@@ -34,12 +51,12 @@ export default function Hero() {
     if (buttonsRef.current) gsap.set(buttonsRef.current, { opacity: 0, y: 15 });
     if (scrollIndicatorRef.current) gsap.set(scrollIndicatorRef.current, { opacity: 0, y: 15 });
     
-    // Animate in sequence with faster durations
-    if (titleRef.current) tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-    if (subtitleRef.current) tl.to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.3');
-    if (taglineRef.current) tl.to(taglineRef.current, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.2');
-    if (buttonsRef.current) tl.to(buttonsRef.current, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.2');
-    if (scrollIndicatorRef.current) tl.to(scrollIndicatorRef.current, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.2');
+    // Animate in sequence with consistent faster durations
+    if (titleRef.current) tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+    if (subtitleRef.current) tl.to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2');
+    if (taglineRef.current) tl.to(taglineRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2');
+    if (buttonsRef.current) tl.to(buttonsRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2');
+    if (scrollIndicatorRef.current) tl.to(scrollIndicatorRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2');
 
     // Parallax effect for floating elements
     if (floatingElementsRef.current.length > 0) {
@@ -81,9 +98,9 @@ export default function Hero() {
 
           {/* Tagline */}
           <div ref={subtitleRef} className="space-y-2">
-            <p className="text-xl md:text-2xl lg:text-3xl text-text-secondary font-light">
+            {/* <p className="text-xl md:text-2xl lg:text-3xl text-text-secondary font-light">
               {personalInfo.title}
-            </p>
+            </p> */}
             <p ref={taglineRef} className="text-lg md:text-xl text-brand-primary font-medium neon-text">
               {personalInfo.tagline}
             </p>
@@ -92,20 +109,20 @@ export default function Hero() {
           {/* CTA Buttons */}
           <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
             <div data-animation="fadeInLeft">
-              <a
-                href="#projects"
+              <button
+                onClick={() => scrollToSection('projects')}
                 className="glass glass-hover px-8 py-4 rounded-full text-lg font-medium text-text-primary transition-all duration-300 hover:scale-105"
               >
                 View My Work
-              </a>
+              </button>
             </div>
             <div data-animation="fadeInRight">
-              <a
-                href="#contact"
+              <button
+                onClick={() => scrollToSection('contact')}
                 className="px-8 py-4 rounded-full text-lg font-medium bg-brand-primary text-bg-primary transition-all duration-300 hover:bg-brand-secondary hover:scale-105 neon-glow"
               >
                 Get In Touch
-              </a>
+              </button>
             </div>
           </div>
         </div>

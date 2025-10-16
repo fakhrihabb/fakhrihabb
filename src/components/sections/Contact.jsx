@@ -39,26 +39,25 @@ export default function Contact() {
   useEffect(() => {
     if (!contactRef.current) return;
 
-    // Animate section title with simple fade-in
+    // Animate section title with consistent faster delays
     if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.1 });
     
-    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.2, duration: 0.5 });
-    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.3 });
+    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.15 });
+    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.2 });
 
     // Simple fade-in for social links
     setTimeout(() => {
       socialLinksRef.current.forEach((ref, index) => {
         if (ref) {
-          fadeInUp(ref, { delay: index * 0.1 });
+          fadeInUp(ref, { delay: index * 0.05 });
         }
       });
-    }, 400);
+    }, 250);
 
     // Animate CTA section with fade-in
     if (ctaRef.current) {
       fadeInUp(ctaRef.current, {
-        delay: 0.8,
-        duration: 0.6,
+        delay: 0.4,
       });
     }
 

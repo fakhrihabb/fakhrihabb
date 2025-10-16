@@ -2,7 +2,7 @@ export const personalInfo = {
   name: "Fakhri Habibi",
   title: "Information Systems Student",
   tagline: "Software Engineering & Project Management Expert",
-  bio: "Passionate Information Systems student specializing in software engineering and project management. I transform complex problems into elegant solutions through systematic analysis and innovative development. With a strong foundation in both technical implementation and strategic planning, I bridge the gap between business needs and technology solutions.",
+  bio: "Passionate Undergraduate Information Systems student specializing in software engineering. I transform complex problems into solutions through systematic analysis and innovative development. With a strong foundation in both technical implementation and strategic planning, I bridge the gap between business needs and technology solutions. Besides coding, I enjoy music, movies, and exploring new technologies.",
   email: "fakhri.habb@example.com",
   location: "Indonesia",
 };
@@ -20,25 +20,14 @@ export const skills = [
     ]
   },
   {
-    category: "Project Management",
+    category: "Data Analytics",
     items: [
-      "Agile & Scrum",
-      "Risk Management",
-      "Stakeholder Management",
-      "Requirements Analysis",
-      "Project Planning",
-      "Team Leadership",
+      "Data Visualization",
+      "Machine Learning",
+      "Exploratory Data Analysis",
+      "Interactive Dashboards",
     ]
   },
-  {
-    category: "Business Analysis",
-    items: [
-      "Data Analytics",
-      "Process Optimization",
-      "Business Intelligence",
-      "Strategic Planning",
-    ]
-  }
 ];
 
 export const techStack = [

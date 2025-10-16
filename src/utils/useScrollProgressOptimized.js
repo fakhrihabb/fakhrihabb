@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -9,27 +9,30 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-export default function useScrollProgress() {
+export default function useScrollProgressOptimized() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const tickingRef = useRef(false);
+  const lastProgressRef = useRef(0);
 
   useEffect(() => {
     // Only run on client side
     if (typeof window === 'undefined') return;
 
-    // Throttle scroll updates for better performance
-    let ticking = false;
-    
     // Create a ScrollTrigger instance to track scroll progress
     const scrollTrigger = ScrollTrigger.create({
       start: 'top top',
       end: 'bottom bottom',
       onUpdate: (self) => {
-        if (!ticking) {
+        // Only update if progress changed significantly (throttling)
+        if (!tickingRef.current && Math.abs(self.progress - lastProgressRef.current) > 0.01) {
+          tickingRef.current = true;
+          
+          // Use requestAnimationFrame for smooth updates
           requestAnimationFrame(() => {
             setScrollProgress(self.progress);
-            ticking = false;
+            lastProgressRef.current = self.progress;
+            tickingRef.current = false;
           });
-          ticking = true;
         }
       },
     });
