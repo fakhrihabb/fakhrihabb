@@ -2,30 +2,74 @@
 
 import Image from 'next/image';
 import { projects } from '@/data/portfolio';
+import { useEffect, useRef } from 'react';
+import { fadeInUp, staggerReveal, parallax, scaleIn, flip3D } from '@/utils/scrollAnimations';
 
 export default function Projects() {
+  const projectsRef = useRef(null);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const titleLineRef = useRef(null);
+  const projectCardsRef = useRef([]);
+  const decorativeElementsRef = useRef([]);
+
+  useEffect(() => {
+    if (!projectsRef.current) return;
+
+    // Animate section title and subtitle with faster delays
+    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.1 });
+    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.2 });
+    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.3, duration: 0.5 });
+
+    // Simple fade-in for project cards
+    setTimeout(() => {
+      projectCardsRef.current.forEach((ref, index) => {
+        if (ref) {
+          fadeInUp(ref, { delay: index * 0.1 });
+        }
+      });
+    }, 400);
+
+    // Parallax effects for decorative elements
+    decorativeElementsRef.current.forEach((element, index) => {
+      if (element) {
+        parallax(element, {
+          speed: 0.15 + (index * 0.05),
+          direction: index % 2 === 0 ? 'vertical' : 'horizontal',
+        });
+      }
+    });
+
+    // Cleanup
+    return () => {
+      // GSAP animations will be cleaned up by the SmoothScrollProvider
+    };
+  }, []);
+
   return (
     <section
+      ref={projectsRef}
       id="projects"
       className="relative min-h-screen py-32 px-6 md:px-12 z-content"
     >
       <div className="container mx-auto max-w-7xl">
         {/* Section Title */}
         <div className="mb-20 text-center">
-          <h2 className="text-5xl md:text-6xl font-bold gradient-text mb-4">
+          <h2 ref={titleRef} className="text-5xl md:text-6xl font-bold gradient-text mb-4">
             Featured Projects
           </h2>
-          <p className="text-xl text-text-secondary mt-4">
+          <p ref={subtitleRef} className="text-xl text-text-secondary mt-4">
             A showcase of my recent work and contributions
           </p>
-          <div className="w-24 h-1 bg-brand-primary rounded-full mx-auto mt-6"></div>
+          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary rounded-full mx-auto mt-6"></div>
         </div>
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <div
               key={project.id}
+              ref={el => projectCardsRef.current[index] = el}
               className="group glass glass-hover rounded-2xl overflow-hidden"
             >
               {/* Project Image */}
@@ -62,9 +106,9 @@ export default function Projects() {
 
                 {/* Technologies */}
                 <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, index) => (
+                  {project.technologies.map((tech, techIndex) => (
                     <span
-                      key={index}
+                      key={techIndex}
                       className="px-3 py-1 bg-bg-tertiary border border-brand-primary/30 rounded-md text-xs text-text-secondary hover:border-brand-primary hover:text-brand-primary transition-all duration-300"
                     >
                       {tech}
@@ -121,9 +165,15 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-primary opacity-5 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-tertiary opacity-5 rounded-full blur-3xl pointer-events-none"></div>
+      {/* Decorative Elements with parallax */}
+      <div
+        ref={el => decorativeElementsRef.current[0] = el}
+        className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-primary opacity-5 rounded-full blur-3xl pointer-events-none"
+      ></div>
+      <div
+        ref={el => decorativeElementsRef.current[1] = el}
+        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-tertiary opacity-5 rounded-full blur-3xl pointer-events-none"
+      ></div>
     </section>
   );
 }

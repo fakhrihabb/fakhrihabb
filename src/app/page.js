@@ -3,6 +3,8 @@
 import { Suspense, lazy } from 'react';
 import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider';
 import ParticleBackground from '@/components/particles/ParticleBackground';
+import ScrollProgress from '@/components/ui/ScrollProgress';
+import SmoothNavigation from '@/components/ui/SmoothNavigation';
 import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
 import Experience from '@/components/sections/Experience';
@@ -22,6 +24,10 @@ export default function Home() {
           <Scene3D scrollProgress={0} />
         </Suspense>
         <ParticleBackground />
+
+        {/* Navigation & Progress Indicators */}
+        <SmoothNavigation />
+        <ScrollProgress />
 
         {/* Main Content */}
         <main className="relative">

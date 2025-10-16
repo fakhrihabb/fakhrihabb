@@ -1,33 +1,90 @@
 'use client';
 
 import { personalInfo, skills, techStack } from '@/data/portfolio';
+import { useEffect, useRef } from 'react';
+import { fadeInUp, fadeInLeft, fadeInRight, staggerReveal, scaleIn, parallax } from '@/utils/scrollAnimations';
 
 export default function About() {
+  const aboutRef = useRef(null);
+  const titleRef = useRef(null);
+  const titleLineRef = useRef(null);
+  const bioRef = useRef(null);
+  const contactInfoRef = useRef(null);
+  const skillsRefs = useRef([]);
+  const techStackTitleRef = useRef(null);
+  const techStackRefs = useRef([]);
+  const decorativeElementRef = useRef(null);
+
+  useEffect(() => {
+    if (!aboutRef.current) return;
+
+    // Animate section title with faster delays
+    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.1 });
+    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.2, duration: 0.5 });
+
+    // Animate bio section
+    if (bioRef.current) fadeInLeft(bioRef.current, { delay: 0.3 });
+
+    // Animate contact info
+    if (contactInfoRef.current) fadeInRight(contactInfoRef.current, { delay: 0.4 });
+
+    // Animate skills sections with reduced delay
+    skillsRefs.current.forEach((ref, index) => {
+      if (ref) fadeInUp(ref, { delay: 0.5 + (index * 0.1) });
+    });
+
+    // Animate tech stack title
+    if (techStackTitleRef.current) fadeInUp(techStackTitleRef.current, { delay: 0.8 });
+
+    // Simple fade-in for tech stack items
+    setTimeout(() => {
+      techStackRefs.current.forEach((ref, index) => {
+        if (ref) {
+          fadeInUp(ref, { delay: index * 0.05 });
+        }
+      });
+    }, 900);
+
+    // Parallax effect for decorative element
+    if (decorativeElementRef.current) {
+      parallax(decorativeElementRef.current, {
+        speed: 0.2,
+        direction: 'horizontal',
+      });
+    }
+
+    // Cleanup
+    return () => {
+      // GSAP animations will be cleaned up by the SmoothScrollProvider
+    };
+  }, []);
+
   return (
     <section
+      ref={aboutRef}
       id="about"
       className="relative min-h-screen py-32 px-6 md:px-12 z-content"
     >
       <div className="container mx-auto max-w-7xl">
         {/* Section Title */}
-        <div className="mb-16">
+        <div ref={titleRef} className="mb-16">
           <h2 className="text-5xl md:text-6xl font-bold gradient-text mb-4">
             About Me
           </h2>
-          <div className="w-24 h-1 bg-brand-primary rounded-full"></div>
+          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary rounded-full"></div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Bio Section */}
           <div className="space-y-6">
-            <div className="glass glass-hover p-8 rounded-2xl">
+            <div ref={bioRef} className="glass glass-hover p-8 rounded-2xl">
               <p className="text-lg text-text-secondary leading-relaxed">
                 {personalInfo.bio}
               </p>
             </div>
 
             {/* Location & Email */}
-            <div className="flex flex-wrap gap-4">
+            <div ref={contactInfoRef} className="flex flex-wrap gap-4">
               <div className="glass px-6 py-3 rounded-full flex items-center gap-2">
                 <span className="text-brand-primary text-xl">📍</span>
                 <span className="text-text-secondary">{personalInfo.location}</span>
@@ -44,6 +101,7 @@ export default function About() {
             {skills.map((skillCategory, index) => (
               <div
                 key={index}
+                ref={el => skillsRefs.current[index] = el}
                 className="glass glass-hover p-6 rounded-2xl"
               >
                 <h3 className="text-2xl font-semibold text-brand-primary mb-4 neon-text">
@@ -66,7 +124,7 @@ export default function About() {
 
         {/* Tech Stack */}
         <div className="mt-20">
-          <h3 className="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text">
+          <h3 ref={techStackTitleRef} className="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text">
             Tech Stack & Tools
           </h3>
 
@@ -74,6 +132,7 @@ export default function About() {
             {techStack.map((tech, index) => (
               <div
                 key={index}
+                ref={el => techStackRefs.current[index] = el}
                 className="glass glass-hover p-6 rounded-xl flex flex-col items-center justify-center gap-3 group"
               >
                 <span className="text-4xl group-hover:scale-125 transition-transform duration-300">
@@ -88,8 +147,11 @@ export default function About() {
         </div>
       </div>
 
-      {/* Decorative Gradient */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-brand-primary opacity-5 rounded-full blur-3xl pointer-events-none"></div>
+      {/* Decorative Gradient with parallax */}
+      <div
+        ref={decorativeElementRef}
+        className="absolute top-1/2 left-0 w-96 h-96 bg-brand-primary opacity-5 rounded-full blur-3xl pointer-events-none"
+      ></div>
     </section>
   );
 }

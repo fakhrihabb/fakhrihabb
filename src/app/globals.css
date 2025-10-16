@@ -64,6 +64,32 @@ body {
   position: relative;
 }
 
+/* Performance optimizations for animations */
+* {
+  will-change: auto;
+}
+
+.animate-on-scroll {
+  will-change: transform, opacity;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Glassmorphism Utilities */
 .glass {
   background: var(--glass-bg);

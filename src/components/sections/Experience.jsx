@@ -1,35 +1,90 @@
 'use client';
 
 import { experiences } from '@/data/portfolio';
+import { useEffect, useRef } from 'react';
+import { fadeInUp, staggerReveal, createScrollTimeline, flip3D, scaleIn, parallax } from '@/utils/scrollAnimations';
 
 export default function Experience() {
+  const experienceRef = useRef(null);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const titleLineRef = useRef(null);
+  const timelineItemsRef = useRef([]);
+  const timelineLineRef = useRef(null);
+  const decorativeElementRef = useRef(null);
+
+  useEffect(() => {
+    if (!experienceRef.current) return;
+
+    // Animate section title and subtitle with faster delays
+    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.1 });
+    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.2 });
+    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.3, duration: 0.5 });
+
+    // Animate timeline line with simple fade-in
+    if (timelineLineRef.current) {
+      fadeInUp(timelineLineRef.current, { delay: 0.4, duration: 0.6 });
+    }
+
+    // Animate timeline items with simpler stagger effect
+    if (timelineItemsRef.current.length > 0) {
+      const validItems = timelineItemsRef.current.filter(Boolean);
+      staggerReveal(validItems, {
+        stagger: 0.15,
+        y: 40,
+        delay: 0.5,
+        scrollTrigger: {
+          start: 'top 85%',
+        },
+      });
+    }
+
+    // Parallax effect for decorative element
+    if (decorativeElementRef.current) {
+      parallax(decorativeElementRef.current, {
+        speed: 0.2,
+        direction: 'vertical',
+      });
+    }
+
+    // Cleanup
+    return () => {
+      // GSAP animations will be cleaned up by the SmoothScrollProvider
+    };
+  }, []);
+
   return (
     <section
+      ref={experienceRef}
       id="experience"
       className="relative min-h-screen py-32 px-6 md:px-12 z-content"
     >
       <div className="container mx-auto max-w-6xl">
         {/* Section Title */}
         <div className="mb-20 text-center">
-          <h2 className="text-5xl md:text-6xl font-bold gradient-text mb-4">
+          <h2 ref={titleRef} className="text-5xl md:text-6xl font-bold gradient-text mb-4">
             Experience
           </h2>
-          <p className="text-xl text-text-secondary mt-4">
+          <p ref={subtitleRef} className="text-xl text-text-secondary mt-4">
             My journey through internships and organizations
           </p>
-          <div className="w-24 h-1 bg-brand-primary rounded-full mx-auto mt-6"></div>
+          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary rounded-full mx-auto mt-6"></div>
         </div>
 
         {/* Timeline */}
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-brand-primary via-brand-secondary to-brand-tertiary hidden md:block"></div>
+          <div
+            ref={timelineLineRef}
+            className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-brand-primary via-brand-secondary to-brand-tertiary hidden md:block"
+          ></div>
 
           {/* Timeline Items */}
           <div className="space-y-12">
             {experiences.map((exp, index) => (
               <div
                 key={exp.id}
+                ref={el => timelineItemsRef.current[index] = el}
                 className={`relative flex flex-col md:flex-row gap-8 items-center ${
                   index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                 }`}
@@ -102,8 +157,11 @@ export default function Experience() {
         </div>
       </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute top-1/3 right-0 w-80 h-80 bg-brand-secondary opacity-5 rounded-full blur-3xl pointer-events-none"></div>
+      {/* Decorative Elements with parallax */}
+      <div
+        ref={decorativeElementRef}
+        className="absolute top-1/3 right-0 w-80 h-80 bg-brand-secondary opacity-5 rounded-full blur-3xl pointer-events-none"
+      ></div>
     </section>
   );
 }

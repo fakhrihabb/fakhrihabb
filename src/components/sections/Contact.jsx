@@ -1,6 +1,8 @@
 'use client';
 
 import { personalInfo, socialLinks } from '@/data/portfolio';
+import { useEffect, useRef } from 'react';
+import { fadeInUp, staggerReveal, scaleIn, parallax, textReveal } from '@/utils/scrollAnimations';
 
 const iconMap = {
   github: (
@@ -26,22 +28,73 @@ const iconMap = {
 };
 
 export default function Contact() {
+  const contactRef = useRef(null);
+  const titleRef = useRef(null);
+  const titleLineRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const socialLinksRef = useRef([]);
+  const ctaRef = useRef(null);
+  const decorativeElementsRef = useRef([]);
+
+  useEffect(() => {
+    if (!contactRef.current) return;
+
+    // Animate section title with simple fade-in
+    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.1 });
+    
+    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.2, duration: 0.5 });
+    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.3 });
+
+    // Simple fade-in for social links
+    setTimeout(() => {
+      socialLinksRef.current.forEach((ref, index) => {
+        if (ref) {
+          fadeInUp(ref, { delay: index * 0.1 });
+        }
+      });
+    }, 400);
+
+    // Animate CTA section with fade-in
+    if (ctaRef.current) {
+      fadeInUp(ctaRef.current, {
+        delay: 0.8,
+        duration: 0.6,
+      });
+    }
+
+    // Parallax effects for decorative elements
+    decorativeElementsRef.current.forEach((element, index) => {
+      if (element) {
+        parallax(element, {
+          speed: 0.2 + (index * 0.05),
+          direction: index % 2 === 0 ? 'vertical' : 'horizontal',
+        });
+      }
+    });
+
+    // Cleanup
+    return () => {
+      // GSAP animations will be cleaned up by the SmoothScrollProvider
+    };
+  }, []);
+
   return (
     <section
+      ref={contactRef}
       id="contact"
       className="relative min-h-screen py-32 px-6 md:px-12 z-content flex items-center justify-center"
     >
       <div className="container mx-auto max-w-4xl text-center">
         {/* Section Title */}
         <div className="mb-8">
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold gradient-text mb-4">
+          <h2 ref={titleRef} className="text-5xl md:text-6xl lg:text-7xl font-bold gradient-text mb-4">
             Let's Connect
           </h2>
-          <div className="w-24 h-1 bg-brand-primary rounded-full mx-auto"></div>
+          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary rounded-full mx-auto"></div>
         </div>
 
         {/* Subtitle */}
-        <p className="text-xl md:text-2xl text-text-secondary mb-16 max-w-2xl mx-auto">
+        <p ref={subtitleRef} className="text-xl md:text-2xl text-text-secondary mb-16 max-w-2xl mx-auto">
           I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
         </p>
 
@@ -50,6 +103,7 @@ export default function Contact() {
           {socialLinks.map((social, index) => (
             <a
               key={index}
+              ref={el => socialLinksRef.current[index] = el}
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
@@ -82,7 +136,7 @@ export default function Contact() {
         </div>
 
         {/* CTA */}
-        <div className="glass p-8 rounded-2xl max-w-2xl mx-auto">
+        <div ref={ctaRef} className="glass p-8 rounded-2xl max-w-2xl mx-auto">
           <h3 className="text-2xl font-bold text-text-primary mb-4">
             Have a project in mind?
           </h3>
@@ -101,9 +155,16 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute top-1/4 left-10 w-80 h-80 bg-brand-primary opacity-10 rounded-full blur-3xl animate-pulse-glow pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-10 w-80 h-80 bg-brand-tertiary opacity-10 rounded-full blur-3xl animate-pulse-glow pointer-events-none" style={{ animationDelay: '1s' }}></div>
+      {/* Decorative Elements with parallax */}
+      <div
+        ref={el => decorativeElementsRef.current[0] = el}
+        className="absolute top-1/4 left-10 w-80 h-80 bg-brand-primary opacity-10 rounded-full blur-3xl animate-pulse-glow pointer-events-none"
+      ></div>
+      <div
+        ref={el => decorativeElementsRef.current[1] = el}
+        className="absolute bottom-1/4 right-10 w-80 h-80 bg-brand-tertiary opacity-10 rounded-full blur-3xl animate-pulse-glow pointer-events-none"
+        style={{ animationDelay: '1s' }}
+      ></div>
     </section>
   );
 }
