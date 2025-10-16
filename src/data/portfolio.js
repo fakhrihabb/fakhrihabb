@@ -3,8 +3,8 @@ export const personalInfo = {
   title: "Information Systems Student",
   tagline: "Software Engineering & Project Management Expert",
   bio: "Passionate Undergraduate Information Systems student specializing in software engineering. I transform complex problems into solutions through systematic analysis and innovative development. With a strong foundation in both technical implementation and strategic planning, I bridge the gap between business needs and technology solutions. Besides coding, I enjoy music, movies, and exploring new technologies.",
-  email: "fakhri.habb@example.com",
-  location: "Indonesia",
+  email: "fakhri.habibi@ui.ac.id",
+  location: "Jakarta, Indonesia",
 };
 
 export const skills = [
