@@ -155,16 +155,6 @@ Configure tsParticles in `src/components/particles/ParticleBackground.jsx`:
 - Safari (latest)
 - Edge (latest)
 
-## Future Enhancements
-
-- [ ] Integrate with CMS (Supabase) for dynamic content
-- [ ] Add blog section
-- [ ] Implement dark/light mode toggle
-- [ ] Add more 3D models/scenes
-- [ ] Contact form with backend integration
-- [ ] Analytics integration
-- [ ] SEO improvements
-
 ## License
 
 This project is for portfolio purposes.
