@@ -159,9 +159,11 @@ export default function About() {
                 ref={el => techStackRefs.current[index] = el}
                 className="glass glass-hover p-6 rounded-xl flex flex-col items-center justify-center gap-3 group"
               >
-                <span className="text-4xl group-hover:scale-125 transition-transform duration-300">
-                  {tech.icon}
-                </span>
+                <img
+                  src={tech.icon}
+                  alt={tech.name}
+                  className="w-12 h-12 group-hover:scale-125 transition-transform duration-300"
+                />
                 <span className="text-sm text-text-secondary text-center group-hover:text-brand-primary transition-colors duration-300">
                   {tech.name}
                 </span>
