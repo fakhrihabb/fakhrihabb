@@ -1,6 +1,6 @@
 # Portfolio Website - Fakhri Habibi
 
-A stunning, modern portfolio website for an Information Systems student specializing in Software Engineering and Project Management. Built with cutting-edge web technologies featuring smooth scrolling, 3D graphics, and interactive particle effects.
+A stunning, modern portfolio website for an Information Systems student specializing in Software Engineering and Data Analytics. Built with cutting-edge web technologies featuring smooth scrolling, 3D graphics, and interactive particle effects.
 
 ## Features
 
@@ -173,7 +173,7 @@ This project is for portfolio purposes.
 
 **Fakhri Habibi**
 - Information Systems Student
-- Software Engineering & Project Management Expert
+- Software Engineering & Data Analytics Expert
 
 ---
 
