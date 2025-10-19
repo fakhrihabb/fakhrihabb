@@ -3,15 +3,14 @@
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=fakhrihabb&label=Profile%20views&color=0e75b6&style=flat" alt="fakhrihabb" /> </p>
 
-<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=fakhrihabb" alt="fakhrihabb" /></a> </p>
 
 - 🚄 Check out this train ticket booking smart solution I recently made for PT KAI! (#1 Hackathon Winner) [Quikyu](https://www.quikyu.xyz/)
-
-- 💗 I'm currently diving deeper into **deep learning, RAG systems, and automation**
 
 - 📦 Worked on an online donation platform, targeted to cover the whole Indonesia, with an amazing dev team of 3! Check out [BarangBareng](https://www.barangbareng.id/)
 
 - 🗣 Are you looking for a professional speaker for your event? Check out [Narrapro](https://www.narrapro.org/)
+
+- 💗 I'm currently diving deeper into **deep learning, RAG systems, and automation**
 
 - 🌟 Check out my full portfolio here: [https://www.fakhrihabb.dev/](https://www.fakhrihabb.dev/)
 
