@@ -1,170 +1,35 @@
-# Portfolio Website - Fakhri Habibi
+<h1 align="center">What's up? I'm Fakhri</h1>
+<h3 align="center">an IS student trying to make his dreams come true ❤️</h3>
 
-A stunning, modern portfolio website for an Information Systems student specializing in Software Engineering and Data Analytics. Built with cutting-edge web technologies featuring smooth scrolling, 3D graphics, and interactive particle effects.
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=fakhrihabb&label=Profile%20views&color=0e75b6&style=flat" alt="fakhrihabb" /> </p>
 
-## Features
+<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=fakhrihabb" alt="fakhrihabb" /></a> </p>
 
-### Design & Style
-- **Dark Theme** with neon green brand colors (#00ff88)
-- **Glassmorphism** effects throughout the UI
-- **Gradient text effects** and neon glow animations
-- **Space Grotesk** font for hero titles, **Inter** for body text
-- Fully responsive design (mobile, tablet, desktop)
+- 🚄 Check out this train ticket booking smart solution I recently made for PT KAI! (#1 Hackathon Winner) [Quikyu](https://www.quikyu.xyz/)
 
-### Wow Factors
-1. **Lenis Smooth Scrolling** - Butter-smooth scroll experience
-2. **Three.js 3D Scene** - Interactive animated 3D background with distorted sphere and particle field
-3. **tsParticles** - Interactive particles that respond to mouse hover with grab, bubble, and repulse effects
-4. **GSAP + ScrollTrigger** - Scroll-linked animations for all sections
+- 💗 I'm currently diving deeper into **deep learning, RAG systems, and automation**
 
-### Sections
-1. **Hero** - Full-screen landing with animated gradient title and scroll indicator
-2. **About** - Bio, skills categorized by expertise, and tech stack with icons
-3. **Experience** - Timeline layout showing internships and organizational roles
-4. **Projects** - Grid of project cards with glassmorphic design and hover effects
-5. **Contact** - Social links with interactive cards
-6. **Footer** - Quick links and additional information
+- 📦 Worked on an online donation platform, targeted to cover the whole Indonesia, with an amazing dev team of 3! Check out [BarangBareng](https://www.barangbareng.id/)
 
-## Tech Stack
+- 🗣 Are you looking for a professional speaker for your event? Check out [Narrapro](https://www.narrapro.org/)
 
-### Core
-- **Next.js 15** - React framework with App Router
-- **React 19** - UI library
-- **Tailwind CSS v4** - Utility-first CSS framework
+- 🌟 Check out my full portfolio here: [https://www.fakhrihabb.dev/](https://www.fakhrihabb.dev/)
 
-### Animation & Effects
-- **Lenis** (v1.3.11) - Smooth scrolling foundation
-- **GSAP** (v3.13.0) - Professional-grade animation library
-- **ScrollTrigger** - Scroll-based animations
-- **Three.js** (v0.180.0) - 3D graphics
-- **@react-three/fiber** (v9.4.0) - React renderer for Three.js
-- **@react-three/drei** (v10.7.6) - Three.js helpers
-- **@tsparticles/react** (v3.0.0) - Interactive particle system
-- **@tsparticles/slim** (v3.9.1) - Lightweight particles bundle
+- Hit me up @ **fakhri.habibi@ui.ac.id**
 
-### Fonts
-- **Inter** - Body text
-- **Space Grotesk** - Display/hero text
+<h3 align="left">Connect with me:</h3>
+<p align="left">
+<a href="https://dev.to/fakhrihabb" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/devto.svg" alt="fakhrihabb" height="30" width="40" /></a>
+<a href="https://linkedin.com/in/fakhri-habibi" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="fakhri-habibi" height="30" width="40" /></a>
+<a href="https://instagram.com/fakhrihabb" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="fakhrihabb" height="30" width="40" /></a>
+<a href="https://medium.com/@fakhrihabb" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/medium.svg" alt="@fakhrihabb" height="30" width="40" /></a>
+</p>
 
-## Project Structure
+<h3 align="left">Languages and Tools:</h3>
+<p align="left"> <a href="https://aws.amazon.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="aws" width="40" height="40"/> </a> <a href="https://www.gnu.org/software/bash/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="bash" width="40" height="40"/> </a> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://dart.dev" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/dartlang/dartlang-icon.svg" alt="dart" width="40" height="40"/> </a> <a href="https://www.djangoproject.com/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/django.svg" alt="django" width="40" height="40"/> </a> <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a> <a href="https://expressjs.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a> <a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a> <a href="https://flutter.dev" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="flutter" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://nextjs.org/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/nextjs-2.svg" alt="nextjs" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://opencv.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/opencv/opencv-icon.svg" alt="opencv" width="40" height="40"/> </a> <a href="https://pandas.pydata.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/2ae2a900d2f041da66e950e4d48052658d850630/icons/pandas/pandas-original.svg" alt="pandas" width="40" height="40"/> </a> <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> <a href="https://scikit-learn.org/" target="_blank" rel="noreferrer"> <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="scikit_learn" width="40" height="40"/> </a> <a href="https://seaborn.pydata.org/" target="_blank" rel="noreferrer"> <img src="https://seaborn.pydata.org/_images/logo-mark-lightbg.svg" alt="seaborn" width="40" height="40"/> </a> <a href="https://www.selenium.dev" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/detain/svg-logos/780f25886640cef088af994181646db2f6b1a3f8/svg/selenium-logo.svg" alt="selenium" width="40" height="40"/> </a> <a href="https://spring.io/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="spring" width="40" height="40"/> </a> <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="tailwind" width="40" height="40"/> </a> <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/> </a> <a href="https://vuejs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original-wordmark.svg" alt="vuejs" width="40" height="40"/> </a> </p>
 
-```
-src/
-├── app/
-│   ├── layout.js          # Root layout with fonts and metadata
-│   ├── page.js            # Main landing page
-│   └── globals.css        # Global styles, theme, animations
-├── components/
-│   ├── providers/
-│   │   └── SmoothScrollProvider.jsx  # Lenis integration
-│   ├── particles/
-│   │   └── ParticleBackground.jsx    # tsParticles configuration
-│   ├── three/
-│   │   └── Scene3D.jsx              # Three.js 3D scene
-│   └── sections/
-│       ├── Hero.jsx                 # Landing section
-│       ├── About.jsx                # About me & skills
-│       ├── Experience.jsx           # Timeline of experience
-│       ├── Projects.jsx             # Project showcase
-│       ├── Contact.jsx              # Contact & social links
-│       └── Footer.jsx               # Footer section
-├── utils/
-│   └── animations.js      # GSAP animation utilities
-└── data/
-    └── portfolio.js       # Dummy data (personal info, projects, etc.)
-```
+<p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=fakhrihabb&show_icons=true&theme=tokyonight&locale=en&layout=compact" alt="fakhrihabb" /></p>
 
-## Getting Started
+<p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=fakhrihabb&show_icons=true&theme=tokyonight&locale=en" alt="fakhrihabb" /></p>
 
-### Prerequisites
-- Node.js 18+ installed
-- npm or yarn package manager
-
-### Installation
-
-1. Install dependencies:
-```bash
-npm install
-```
-
-2. Run the development server:
-```bash
-npm run dev
-```
-
-3. Open [http://localhost:3000](http://localhost:3000) in your browser
-
-### Build for Production
-
-```bash
-npm run build
-npm start
-```
-
-## Customization
-
-### Update Personal Information
-
-Edit `src/data/portfolio.js` to customize:
-- Personal info (name, title, bio, email)
-- Skills and expertise areas
-- Tech stack with icons
-- Work experience
-- Projects with images and descriptions
-- Social media links
-
-### Update Brand Colors
-
-Edit `src/app/globals.css` CSS variables:
-```css
---brand-primary: #00ff88;    /* Primary green */
---brand-secondary: #00cc6a;  /* Secondary green */
---brand-tertiary: #66ffaa;   /* Tertiary green */
-```
-
-### Adjust Animations
-
-Modify animation utilities in `src/utils/animations.js` or component-specific animations in their respective files.
-
-### Three.js Scene
-
-Customize the 3D scene in `src/components/three/Scene3D.jsx`:
-- Change sphere distortion
-- Adjust particle count and distribution
-- Modify colors and lighting
-
-### Particle Effects
-
-Configure tsParticles in `src/components/particles/ParticleBackground.jsx`:
-- Particle count, size, and opacity
-- Interaction modes (grab, bubble, repulse)
-- Connection lines and colors
-
-## Performance Optimizations
-
-- **Lazy Loading**: Three.js scene is lazy-loaded for faster initial page load
-- **Responsive Particles**: Reduced particle count on mobile devices
-- **Image Optimization**: Using Next.js Image component
-- **Code Splitting**: Automatic code splitting by Next.js
-- **Reduced Motion**: Respects user's reduced motion preferences
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## License
-
-This project is for portfolio purposes.
-
-## Author
-
-**Fakhri Habibi**
-- Information Systems Student
-- Software Engineering & Data Analytics Expert
-
----
-
-Built with ❤️ using Next.js, Three.js, GSAP, and Lenis
+<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=fakhrihabb&" alt="fakhrihabb" /></p>
