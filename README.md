@@ -4,7 +4,7 @@
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=fakhrihabb&label=Profile%20views&color=0e75b6&style=flat" alt="fakhrihabb" /> </p>
 
 
-- 🚄 Check out this train ticket booking smart solution I recently made for PT KAI! (#1 Hackathon Winner) [Quikyu](https://www.quikyu.xyz/)
+- 🚄 Check out this train ticket booking smart solution I recently made for PT KAI! (#1 Hackathon Winner): [Quikyu](https://www.quikyu.xyz/)
 
 - 📦 Worked on an online donation platform, targeted to cover the whole Indonesia, with an amazing dev team of 3! Check out [BarangBareng](https://www.barangbareng.id/)
 
