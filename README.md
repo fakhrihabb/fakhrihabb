@@ -4,17 +4,17 @@
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=fakhrihabb&label=Profile%20views&color=0e75b6&style=flat" alt="fakhrihabb" /> </p>
 
 
-- 🚄 Check out this train ticket booking smart solution I recently made for PT KAI! (#1 Hackathon Winner): [Quikyu](https://www.quikyu.xyz/)
+- 🚄 Check out this train ticketing smart solution I recently made for PT KAI! (#1 Hackathon Winner): [Quikyu](https://www.quikyu.xyz/)
 
 - 📦 Worked on an online donation platform, targeted to cover the whole Indonesia, with an amazing dev team of 3! Check out [BarangBareng](https://www.barangbareng.id/)
 
 - 🗣 Are you looking for a professional speaker for your event? Check out [Narrapro](https://www.narrapro.org/)
 
-- 💗 I'm currently diving deeper into **deep learning, RAG systems, and automation**
+- 💗 Currently diving deeper into **deep learning, RAG systems, and automation**
 
 - 🌟 Check out my full portfolio here: [https://www.fakhrihabb.dev/](https://www.fakhrihabb.dev/)
 
-- Hit me up @ **fakhri.habibi@ui.ac.id**
+Feel like chatting? Hit me up @ **fakhri.habibi@ui.ac.id**
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
