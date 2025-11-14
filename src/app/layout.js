@@ -17,12 +17,12 @@ const pressStart2P = Press_Start_2P({
 });
 
 export const metadata = {
-  title: "Fakhri Habibi | Information Systems Student",
+  title: "Fakhri Habibi | Portfolio",
   description: "Portfolio of Fakhri Habibi - Information Systems student specializing in Software Engineering and Project Management. Explore my projects, experience, and skills.",
   keywords: ["portfolio", "information systems", "software engineering", "project management", "web development"],
   authors: [{ name: "Fakhri Habibi" }],
   openGraph: {
-    title: "Fakhri Habibi | Information Systems Student",
+    title: "Fakhri Habibi | Portfolio",
     description: "Portfolio showcasing software engineering and project management expertise",
     type: "website",
   },
