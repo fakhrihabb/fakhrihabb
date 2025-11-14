@@ -9,6 +9,7 @@ export default function SmoothNavigation() {
   const navItemsRef = useRef([]);
   const [activeSection, setActiveSection] = useState('hero');
   const [isNavVisible, setIsNavVisible] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
 
   const sections = [
@@ -82,6 +83,9 @@ export default function SmoothNavigation() {
   }, [isNavVisible]);
 
   const scrollToSection = (sectionId) => {
+    // Close mobile menu when navigating
+    setIsMobileMenuOpen(false);
+    
     // Special case for 'hero' section - scroll to top of page
     if (sectionId === 'hero') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -137,16 +141,37 @@ export default function SmoothNavigation() {
           {/* Mobile Menu Button - Pixelated */}
           <button
             className="md:hidden text-brand-primary border-2 border-brand-primary p-1.5 md:p-2 flex-shrink-0"
-            onClick={() => {
-              // For mobile, you might want to implement a mobile menu
-              scrollToSection('about');
-            }}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
-              <path strokeLinecap="square" strokeLinejoin="miter" d="M4 6h16M4 12h16M4 18h16" />
+              {isMobileMenuOpen ? (
+                <path strokeLinecap="square" strokeLinejoin="miter" d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="square" strokeLinejoin="miter" d="M4 6h16M4 12h16M4 18h16" />
+              )}
             </svg>
           </button>
         </div>
+
+        {/* Mobile Menu - Dropdown */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-3 border-t-2 border-brand-primary/30 pt-3 space-y-2">
+            {sections.map((section) => (
+              <button
+                key={section.id}
+                onClick={() => scrollToSection(section.id)}
+                className={`block w-full text-left text-lg font-medium transition-colors duration-200 px-3 py-2 border border-transparent ${
+                  activeSection === section.id
+                    ? 'text-brand-primary border-brand-primary neon-glow bg-brand-primary/10'
+                    : 'text-text-secondary hover:text-text-primary hover:border-brand-primary/50'
+                }`}
+                style={{ fontFamily: 'var(--font-vt323), monospace' }}
+              >
+                {activeSection === section.id ? `> ${section.label.toUpperCase()}` : section.label.toUpperCase()}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </nav>
   );
