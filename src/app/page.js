@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
+import LoadingScreen from '@/components/ui/LoadingScreen';
 import ScrollProgress from '@/components/ui/ScrollProgress';
 import SmoothNavigation from '@/components/ui/SmoothNavigation';
 import Hero from '@/components/sections/Hero';
@@ -31,6 +32,8 @@ const ScanLine = dynamic(() => import('@/components/effects/ScanLine'), {
 export default function Home() {
   return (
     <div className="relative overflow-x-hidden max-w-full pixel-bg">
+      {/* Loading Screen */}
+      <LoadingScreen />
       {/* Background Layers - Binary Rain */}
       <Suspense fallback={null}>
         <BinaryRain />
