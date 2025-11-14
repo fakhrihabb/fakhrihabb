@@ -14,7 +14,7 @@ import Footer from '@/components/sections/Footer';
 
 export default function Home() {
   return (
-    <div className="relative overflow-x-hidden max-w-full">
+    <div className="relative overflow-x-hidden max-w-full pixel-bg">
       {/* Background Layers - Binary Rain */}
       <BinaryRain />
 

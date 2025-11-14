@@ -43,7 +43,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center z-content overflow-hidden pixel-bg">
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center z-content overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 md:px-12 max-w-7xl w-full">
         <div className="text-center space-y-8 max-w-full">
           {/* Main Title - Pixelated Matrix Style */}
