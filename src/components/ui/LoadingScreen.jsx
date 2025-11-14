@@ -10,8 +10,8 @@ export default function LoadingScreen() {
 
   const messages = [
     'INITIALIZING SYSTEM...',
-    'LOADING FAW_OS...',
-    'COMPILING V2.exe...',
+    'BOOTING FAW_OS...',
+    'COMPILING MATRIX_V2.exe...',
     'ESTABLISHING CONNECTION...',
     'SYSTEM READY'
   ];
@@ -19,10 +19,11 @@ export default function LoadingScreen() {
   useEffect(() => {
     // Generate random matrix characters for background
     const chars = [];
+    const letters = ['F', 'H'];
     for (let i = 0; i < 30; i++) {
       chars.push({
         id: i,
-        char: String.fromCharCode(0x30A0 + Math.random() * 96),
+        char: letters[Math.floor(Math.random() * letters.length)],
         left: Math.random() * 100,
         delay: Math.random() * 2,
         duration: 2 + Math.random() * 2
