@@ -1,16 +1,7 @@
-<h1 align="center">What's up? I'm Fakhri</h1>
-<h3 align="center">an IS student trying to make his dreams come true ❤️</h3>
+<h1 align="center">Hey there, I'm Fakhri!</h1>
+<h3 align="center">Your #1 Full Stack Engineer ❤️</h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=fakhrihabb&label=Profile%20views&color=0e75b6&style=flat" alt="fakhrihabb" /> </p>
-
-
-- 🚄 Check out this train ticketing smart solution I recently made for PT KAI! (#1 Hackathon Winner): [Quikyu](https://www.quikyu.xyz/)
-
-- 📦 Worked on an online donation platform, targeted to cover the whole Indonesia, with an amazing dev team of 3! Check out [BarangBareng](https://www.barangbareng.id/)
-
-- 🗣 Are you looking for a professional speaker for your event? Check out [Narrapro](https://www.narrapro.org/)
-
-- 💗 Currently diving deeper into **deep learning, RAG systems, and automation**
 
 - 🌟 Check out my full portfolio here: [https://www.fakhrihabb.dev/](https://www.fakhrihabb.dev/)
 
