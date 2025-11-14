@@ -10,8 +10,8 @@ export default function LoadingScreen() {
 
   const messages = [
     'INITIALIZING SYSTEM...',
-    'LOADING OS...',
-    'COMPILING SIMULATION_WORLD...',
+    'LOADING FAW_OS...',
+    'COMPILING V2.exe...',
     'ESTABLISHING CONNECTION...',
     'SYSTEM READY'
   ];
@@ -35,7 +35,7 @@ export default function LoadingScreen() {
     let messageIndex = 0;
 
     const progressInterval = setInterval(() => {
-      currentProgress += Math.random() * 15 + 5;
+      currentProgress += Math.random() * 8 + 3;
       
       if (currentProgress >= 100) {
         currentProgress = 100;
@@ -44,7 +44,7 @@ export default function LoadingScreen() {
         // Wait a moment before fading out
         setTimeout(() => {
           setIsLoading(false);
-        }, 500);
+        }, 800);
       }
 
       setProgress(Math.min(currentProgress, 100));
@@ -55,7 +55,7 @@ export default function LoadingScreen() {
         messageIndex = newMessageIndex;
         setLoadingText(messages[messageIndex]);
       }
-    }, 300);
+    }, 400);
 
     return () => clearInterval(progressInterval);
   }, []);
