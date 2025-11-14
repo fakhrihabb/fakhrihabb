@@ -118,7 +118,7 @@ export default function Footer() {
 
           <div className="flex items-center gap-6">
             <p className="text-text-muted text-xs">
-              Built with Next.js, Three.js, GSAP & Lenis
+              Built with Next.js & GSAP
             </p>
             <button
               onClick={scrollToTop}

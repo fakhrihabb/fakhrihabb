@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "lenis/dist/lenis.css";
 
 :root {
   /* Dark Background Colors */
@@ -26,6 +25,9 @@
   --glow-primary: 0 0 20px rgba(0, 255, 136, 0.5);
   --glow-secondary: 0 0 40px rgba(0, 255, 136, 0.3);
   --shadow-elevation: 0 8px 32px rgba(0, 0, 0, 0.5);
+
+  /* Matrix Colors */
+  --matrix-green: #00ff41;
 }
 
 @theme inline {
@@ -41,6 +43,8 @@
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
+
+  --color-matrix-green: var(--matrix-green);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -224,4 +228,36 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Matrix Cursor Effect */
+@keyframes matrix-fade {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  15% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+.matrix-trail {
+  animation: matrix-fade 1.2s ease-out forwards;
+}
+
+.matrix-number {
+  color: var(--matrix-green);
+  text-shadow:
+    0 0 5px var(--matrix-green),
+    0 0 10px var(--matrix-green);
+  animation: matrix-fade 1.2s ease-out forwards;
+}
+
+.text-matrix-green {
+  color: var(--matrix-green);
 }

@@ -51,11 +51,6 @@ export const fadeInUp = (element, options = {}) => {
       },
     });
 
-    // Track the ScrollTrigger instance for cleanup
-    if (typeof window !== 'undefined' && window.addScrollTrigger) {
-      window.addScrollTrigger(animation.scrollTrigger);
-    }
-
     return animation;
   } catch (error) {
     console.warn('Error in fadeInUp animation:', error);
@@ -95,9 +90,6 @@ export const fadeInLeft = (element, options = {}) => {
       },
     });
 
-    if (typeof window !== 'undefined' && window.addScrollTrigger) {
-      window.addScrollTrigger(animation.scrollTrigger);
-    }
 
     return animation;
   } catch (error) {
@@ -138,9 +130,6 @@ export const fadeInRight = (element, options = {}) => {
       },
     });
 
-    if (typeof window !== 'undefined' && window.addScrollTrigger) {
-      window.addScrollTrigger(animation.scrollTrigger);
-    }
 
     return animation;
   } catch (error) {
@@ -178,9 +167,6 @@ export const scaleIn = (element, options = {}) => {
     },
   });
 
-  if (typeof window !== 'undefined' && window.addScrollTrigger) {
-    window.addScrollTrigger(animation.scrollTrigger);
-  }
 
   return animation;
 };
@@ -219,9 +205,6 @@ export const parallax = (element, options = {}) => {
       },
     });
 
-    if (typeof window !== 'undefined' && window.addScrollTrigger) {
-      window.addScrollTrigger(animation.scrollTrigger);
-    }
 
     return animation;
   } catch (error) {
@@ -301,9 +284,6 @@ export const textReveal = (element, options = {}) => {
     },
   });
 
-  if (typeof window !== 'undefined' && window.addScrollTrigger) {
-    window.addScrollTrigger(animation.scrollTrigger);
-  }
 
   return animation;
 };
@@ -348,9 +328,6 @@ export const staggerReveal = (elements, options = {}) => {
       },
     });
 
-    if (typeof window !== 'undefined' && window.addScrollTrigger) {
-      window.addScrollTrigger(animation.scrollTrigger);
-    }
 
     return animation;
   } catch (error) {
@@ -378,9 +355,6 @@ export const pinSection = (element, options = {}) => {
     ...scrollTrigger,
   });
 
-  if (typeof window !== 'undefined' && window.addScrollTrigger) {
-    window.addScrollTrigger(trigger);
-  }
 
   return trigger;
 };
@@ -413,9 +387,6 @@ export const createScrollTimeline = (element, animations, options = {}) => {
     tl[anim.type](...anim.params);
   });
 
-  if (typeof window !== 'undefined' && window.addScrollTrigger) {
-    window.addScrollTrigger(tl.scrollTrigger);
-  }
 
   return tl;
 };
@@ -445,9 +416,6 @@ export const morphPath = (element, toPath, options = {}) => {
     },
   });
 
-  if (typeof window !== 'undefined' && window.addScrollTrigger) {
-    window.addScrollTrigger(animation.scrollTrigger);
-  }
 
   return animation;
 };
@@ -483,9 +451,6 @@ export const flip3D = (element, options = {}) => {
     },
   });
 
-  if (typeof window !== 'undefined' && window.addScrollTrigger) {
-    window.addScrollTrigger(animation.scrollTrigger);
-  }
 
   return animation;
 };
@@ -581,9 +546,6 @@ export const scrollProgress = (element, options = {}) => {
     },
   });
 
-  if (typeof window !== 'undefined' && window.addScrollTrigger) {
-    window.addScrollTrigger(animation.scrollTrigger);
-  }
 
   return animation;
 };

@@ -8,29 +8,19 @@ import gsap from 'gsap';
 export default function Hero() {
   const heroRef = useRef(null);
   const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const taglineRef = useRef(null);
   const buttonsRef = useRef(null);
   const scrollIndicatorRef = useRef(null);
   const floatingElementsRef = useRef([]);
 
   const scrollToSection = (sectionId) => {
-    if (window.getLenis) {
-      const lenis = window.getLenis();
-      const section = document.getElementById(sectionId);
-      if (section) {
-        lenis.scrollTo(section, {
-          offset: -80, // Account for fixed nav height
-          duration: 1.5,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-        });
-      }
-    } else {
-      // Fallback to native smooth scrolling
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const navHeight = 80; // Account for fixed nav height
+      const targetPosition = section.offsetTop - navHeight;
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -43,18 +33,14 @@ export default function Hero() {
 
     // Initial animations on mount - faster and simpler
     const tl = gsap.timeline();
-    
+
     // Set initial states
     if (titleRef.current) gsap.set(titleRef.current, { opacity: 0, y: 30 });
-    if (subtitleRef.current) gsap.set(subtitleRef.current, { opacity: 0, y: 20 });
-    if (taglineRef.current) gsap.set(taglineRef.current, { opacity: 0, y: 20 });
     if (buttonsRef.current) gsap.set(buttonsRef.current, { opacity: 0, y: 15 });
     if (scrollIndicatorRef.current) gsap.set(scrollIndicatorRef.current, { opacity: 0, y: 15 });
-    
+
     // Animate in sequence with consistent faster durations
     if (titleRef.current) tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
-    if (subtitleRef.current) tl.to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2');
-    if (taglineRef.current) tl.to(taglineRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2');
     if (buttonsRef.current) tl.to(buttonsRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2');
     if (scrollIndicatorRef.current) tl.to(scrollIndicatorRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2');
 
@@ -95,16 +81,6 @@ export default function Hero() {
               {personalInfo.name}
             </span>
           </h1>
-
-          {/* Tagline */}
-          <div ref={subtitleRef} className="space-y-2">
-            {/* <p className="text-xl md:text-2xl lg:text-3xl text-text-secondary font-light">
-              {personalInfo.title}
-            </p> */}
-            <p ref={taglineRef} className="text-lg md:text-xl text-brand-primary font-medium neon-text">
-              {personalInfo.tagline}
-            </p>
-          </div>
 
           {/* CTA Buttons */}
           <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">

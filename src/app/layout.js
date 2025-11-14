@@ -1,5 +1,6 @@
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import "lenis/dist/lenis.css";
 
 const inter = Inter({
   variable: "--font-geist-sans",
