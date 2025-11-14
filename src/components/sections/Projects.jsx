@@ -50,18 +50,15 @@ export default function Projects() {
     <section
       ref={projectsRef}
       id="projects"
-      className="relative min-h-screen py-32 px-6 md:px-12 z-content"
+      className="relative pt-32 pb-32 px-4 sm:px-6 md:px-12 z-content overflow-hidden"
     >
-      <div className="container mx-auto max-w-7xl">
-        {/* Section Title */}
-        <div className="mb-20 text-center">
-          <h2 ref={titleRef} className="text-5xl md:text-6xl font-bold gradient-text mb-4">
-            Featured Projects
+      <div className="container mx-auto max-w-7xl w-full">
+        {/* Section Title - Pixelated */}
+        <div ref={titleRef} className="mb-16 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4" style={{ fontFamily: 'var(--font-press-start), monospace' }}>
+            {'< PROJECTS />'}
           </h2>
-          <p ref={subtitleRef} className="text-xl text-text-secondary mt-4">
-            A showcase of my recent work and contributions
-          </p>
-          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary rounded-full mx-auto mt-6"></div>
+          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary mx-auto"></div>
         </div>
 
         {/* Projects Grid */}
@@ -172,11 +169,11 @@ export default function Projects() {
       {/* Decorative Elements with parallax */}
       <div
         ref={el => decorativeElementsRef.current[0] = el}
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-primary opacity-5 rounded-full blur-3xl pointer-events-none"
+        className="hidden lg:block absolute top-1/4 left-1/4 w-64 lg:w-96 h-64 lg:h-96 bg-brand-primary opacity-5 rounded-full blur-3xl pointer-events-none -z-10"
       ></div>
       <div
         ref={el => decorativeElementsRef.current[1] = el}
-        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-tertiary opacity-5 rounded-full blur-3xl pointer-events-none"
+        className="hidden lg:block absolute bottom-1/4 right-1/4 w-64 lg:w-96 h-64 lg:h-96 bg-brand-tertiary opacity-5 rounded-full blur-3xl pointer-events-none -z-10"
       ></div>
     </section>
   );

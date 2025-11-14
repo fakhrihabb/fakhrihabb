@@ -1,33 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  /* Dark Background Colors */
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #0f0f0f;
+  /* Monochrome Background Colors */
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
   --bg-tertiary: #121212;
 
-  /* Green Brand Colors */
-  --brand-primary: #00ff88;
-  --brand-secondary: #00cc6a;
-  --brand-tertiary: #66ffaa;
-  --brand-dark: #008855;
+  /* Monochrome Brand Colors (White/Grey) */
+  --brand-primary: #ffffff;
+  --brand-secondary: #e0e0e0;
+  --brand-tertiary: #c0c0c0;
+  --brand-dark: #808080;
 
   /* Text Colors */
-  --text-primary: #ededed;
-  --text-secondary: #b0b0b0;
-  --text-muted: #6b7280;
+  --text-primary: #ffffff;
+  --text-secondary: #c0c0c0;
+  --text-muted: #808080;
 
-  /* Glassmorphism */
-  --glass-bg: rgba(18, 18, 18, 0.7);
-  --glass-border: rgba(0, 255, 136, 0.1);
+  /* Glassmorphism - Monochrome */
+  --glass-bg: rgba(18, 18, 18, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.15);
 
-  /* Shadows & Glows */
-  --glow-primary: 0 0 20px rgba(0, 255, 136, 0.5);
-  --glow-secondary: 0 0 40px rgba(0, 255, 136, 0.3);
-  --shadow-elevation: 0 8px 32px rgba(0, 0, 0, 0.5);
+  /* Shadows & Glows - White */
+  --glow-primary: 0 0 20px rgba(255, 255, 255, 0.6);
+  --glow-secondary: 0 0 40px rgba(255, 255, 255, 0.4);
+  --shadow-elevation: 0 8px 32px rgba(0, 0, 0, 0.8);
 
-  /* Matrix Colors */
-  --matrix-green: #00ff41;
+  /* Accent Grey */
+  --accent-grey: #404040;
 }
 
 @theme inline {
@@ -44,11 +44,11 @@
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
 
-  --color-matrix-green: var(--matrix-green);
+  --color-accent-grey: var(--accent-grey);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-vt323);
+  --font-mono: var(--font-vt323);
+  --font-display: var(--font-press-start);
 
   /* Custom animations */
   --animate-float: float 6s ease-in-out infinite;
@@ -56,16 +56,66 @@
   --animate-gradient: gradient-shift 8s ease infinite;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: auto;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-vt323), monospace;
   overflow-x: hidden;
+  max-width: 100vw;
   position: relative;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Scanline effect overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.3;
+}
+
+/* CRT screen flicker */
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  50% { opacity: 1; }
+  100% { opacity: 0.97; }
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.02);
+  pointer-events: none;
+  z-index: 9998;
+  animation: flicker 0.15s infinite;
 }
 
 /* Performance optimizations for animations */
@@ -94,59 +144,99 @@ body {
   }
 }
 
-/* Glassmorphism Utilities */
+/* Glassmorphism Utilities - Pixelated */
 .glass {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 2px solid var(--glass-border);
   box-shadow: var(--shadow-elevation);
+  image-rendering: pixelated;
 }
 
 .glass-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s steps(4);
 }
 
 .glass-hover:hover {
-  background: rgba(18, 18, 18, 0.85);
+  background: rgba(18, 18, 18, 0.95);
   border-color: var(--brand-primary);
   box-shadow: var(--glow-primary), var(--shadow-elevation);
-  transform: translateY(-4px);
+  transform: translateY(-2px);
 }
 
-/* Neon Glow Effects */
+/* Pixelated borders */
+.pixel-border {
+  border: 3px solid var(--brand-primary);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 0 3px var(--bg-primary);
+}
+
+.pixel-corners {
+  position: relative;
+}
+
+.pixel-corners::before,
+.pixel-corners::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--brand-primary);
+}
+
+.pixel-corners::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.pixel-corners::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+/* White Glow Effects */
 .neon-text {
   color: var(--brand-primary);
   text-shadow:
-    0 0 10px rgba(0, 255, 136, 0.8),
-    0 0 20px rgba(0, 255, 136, 0.6),
-    0 0 30px rgba(0, 255, 136, 0.4);
+    0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 20px rgba(255, 255, 255, 0.6),
+    0 0 30px rgba(255, 255, 255, 0.4);
+  font-family: var(--font-press-start), monospace;
+  letter-spacing: 2px;
 }
 
 .neon-border {
-  border: 1px solid var(--brand-primary);
+  border: 2px solid var(--brand-primary);
   box-shadow:
-    0 0 10px rgba(0, 255, 136, 0.5),
-    inset 0 0 10px rgba(0, 255, 136, 0.2);
+    0 0 10px rgba(255, 255, 255, 0.5),
+    inset 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .neon-glow {
   box-shadow: var(--glow-primary);
 }
 
-/* Gradient Effects */
+/* Gradient Effects - Monochrome */
 .gradient-text {
-  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-tertiary) 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #c0c0c0 50%, #ffffff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-family: var(--font-press-start), monospace;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 .gradient-border {
   position: relative;
   border: 2px solid transparent;
   background: linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
-              linear-gradient(135deg, var(--brand-primary), var(--brand-tertiary)) border-box;
+              linear-gradient(135deg, var(--brand-primary), var(--brand-dark)) border-box;
 }
 
 .gradient-bg {
@@ -154,6 +244,25 @@ body {
     var(--bg-primary) 0%,
     var(--bg-secondary) 50%,
     var(--bg-tertiary) 100%);
+}
+
+/* Retro pixelated background patterns */
+.pixel-bg {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.03) 2px,
+      rgba(255, 255, 255, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.03) 2px,
+      rgba(255, 255, 255, 0.03) 4px
+    );
 }
 
 /* Custom Animations */
@@ -168,10 +277,10 @@ body {
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
   }
   50% {
-    box-shadow: 0 0 40px rgba(0, 255, 136, 0.8);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
   }
 }
 
@@ -219,6 +328,19 @@ body {
   z-index: 10;
 }
 
+/* Prevent overflow on all elements */
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent text overflow */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -230,7 +352,7 @@ body {
   }
 }
 
-/* Matrix Cursor Effect */
+/* Matrix Cursor Effect - Monochrome */
 @keyframes matrix-fade {
   0% {
     opacity: 0;
@@ -251,13 +373,36 @@ body {
 }
 
 .matrix-number {
-  color: var(--matrix-green);
+  color: var(--brand-primary);
   text-shadow:
-    0 0 5px var(--matrix-green),
-    0 0 10px var(--matrix-green);
+    0 0 5px rgba(255, 255, 255, 0.8),
+    0 0 10px rgba(255, 255, 255, 0.6);
   animation: matrix-fade 1.2s ease-out forwards;
+  font-family: var(--font-vt323), monospace;
 }
 
-.text-matrix-green {
-  color: var(--matrix-green);
+/* Glitch effect */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.glitch {
+  animation: glitch 0.3s infinite;
 }

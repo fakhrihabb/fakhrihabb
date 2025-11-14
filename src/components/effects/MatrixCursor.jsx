@@ -65,8 +65,8 @@ export default function MatrixCursor() {
           key={trail.id}
           className="absolute"
           style={{
-            left: `${trail.x}px`,
-            top: `${trail.y}px`,
+            left: `${Math.min(Math.max(trail.x, 100), typeof window !== 'undefined' ? window.innerWidth - 100 : trail.x)}px`,
+            top: `${Math.min(Math.max(trail.y, 100), typeof window !== 'undefined' ? window.innerHeight - 100 : trail.y)}px`,
             width: '200px',
             height: '200px',
             transform: 'translate(-50%, -50%)',

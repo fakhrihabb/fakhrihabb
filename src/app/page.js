@@ -2,7 +2,7 @@
 
 import ScrollProgress from '@/components/ui/ScrollProgress';
 import SmoothNavigation from '@/components/ui/SmoothNavigation';
-import BlobBackground from '@/components/ui/BlobBackground';
+import BinaryRain from '@/components/effects/BinaryRain';
 import MatrixCursor from '@/components/effects/MatrixCursor';
 import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
@@ -13,9 +13,9 @@ import Footer from '@/components/sections/Footer';
 
 export default function Home() {
   return (
-    <div className="relative">
-      {/* Background Layers */}
-      <BlobBackground />
+    <div className="relative overflow-x-hidden max-w-full">
+      {/* Background Layers - Binary Rain */}
+      <BinaryRain />
 
       {/* Matrix Cursor Effect */}
       <MatrixCursor />

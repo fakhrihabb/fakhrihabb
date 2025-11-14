@@ -57,18 +57,15 @@ export default function Experience() {
     <section
       ref={experienceRef}
       id="experience"
-      className="relative min-h-screen py-32 px-6 md:px-12 z-content"
+      className="relative pt-32 pb-32 px-4 sm:px-6 md:px-12 z-content overflow-hidden"
     >
-      <div className="container mx-auto max-w-6xl">
-        {/* Section Title */}
-        <div className="mb-20 text-center">
-          <h2 ref={titleRef} className="text-5xl md:text-6xl font-bold gradient-text mb-4">
-            Experience
+      <div className="container mx-auto max-w-6xl w-full">
+        {/* Section Title - Pixelated */}
+        <div ref={titleRef} className="mb-16 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4" style={{ fontFamily: 'var(--font-press-start), monospace' }}>
+            {'< EXPERIENCE />'}
           </h2>
-          <p ref={subtitleRef} className="text-xl text-text-secondary mt-4">
-            My journey through internships and organizations
-          </p>
-          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary rounded-full mx-auto mt-6"></div>
+          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary mx-auto"></div>
         </div>
 
         {/* Timeline */}
@@ -160,7 +157,7 @@ export default function Experience() {
       {/* Decorative Elements with parallax */}
       <div
         ref={decorativeElementRef}
-        className="absolute top-1/3 right-0 w-80 h-80 bg-brand-secondary opacity-5 rounded-full blur-3xl pointer-events-none"
+        className="hidden lg:block absolute top-1/3 right-0 w-48 lg:w-80 h-48 lg:h-80 bg-brand-secondary opacity-5 rounded-full blur-3xl pointer-events-none -z-10"
       ></div>
     </section>
   );

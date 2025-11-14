@@ -63,22 +63,22 @@ export default function About() {
     <section
       ref={aboutRef}
       id="about"
-      className="relative min-h-screen py-32 px-6 md:px-12 z-content"
+      className="relative pt-32 pb-32 px-4 sm:px-6 md:px-12 z-content overflow-hidden"
     >
-      <div className="container mx-auto max-w-7xl">
-        {/* Section Title */}
-        <div ref={titleRef} className="mb-16">
-          <h2 className="text-5xl md:text-6xl font-bold gradient-text mb-4">
-            About Me
+      <div className="container mx-auto max-w-7xl w-full">
+        {/* Section Title - Pixelated */}
+        <div ref={titleRef} className="mb-16 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4" style={{ fontFamily: 'var(--font-press-start), monospace' }}>
+            {'< ABOUT_ME />'}
           </h2>
-          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary rounded-full"></div>
+          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary mx-auto"></div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Bio Section */}
+          {/* Bio Section - Pixelated */}
           <div className="space-y-6">
-            <div ref={bioRef} className="glass glass-hover p-8 rounded-2xl">
-              <p className="text-lg text-text-secondary leading-relaxed mb-4">
+            <div ref={bioRef} className="glass glass-hover p-8 border-2 border-brand-primary/30 pixel-corners">
+              <p className="text-xl text-text-secondary leading-relaxed mb-4" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
                 {personalInfo.bio}
               </p>
               <button
@@ -88,54 +88,56 @@ export default function About() {
                     contactSection.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
-                className="text-brand-primary font-semibold hover:text-brand-secondary transition-colors duration-300 cursor-pointer inline-flex items-center gap-2 group"
+                className="text-brand-primary font-semibold hover:text-brand-secondary transition-colors duration-200 cursor-pointer inline-flex items-center gap-2 group border-2 border-brand-primary px-4 py-2 pixel-corners neon-glow"
+                style={{ fontFamily: 'var(--font-vt323), monospace', fontSize: '1.2rem' }}
               >
-                Let's have a chat!
+                {'> CONNECT_NOW'}
                 <svg
-                  className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+                  className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-200"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  strokeWidth={3}
                 >
                   <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
+                    strokeLinecap="square"
+                    strokeLinejoin="miter"
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
               </button>
             </div>
 
-            {/* Location & Email */}
+            {/* Location & Email - Pixelated */}
             <div ref={contactInfoRef} className="flex flex-wrap gap-4">
-              <div className="glass px-6 py-3 rounded-full flex items-center gap-2">
-                <span className="text-brand-primary text-xl">📍</span>
-                <span className="text-text-secondary">{personalInfo.location}</span>
+              <div className="glass px-4 sm:px-6 py-3 border-2 border-brand-primary/30 flex items-center gap-2 pixel-corners max-w-full" style={{ fontFamily: 'var(--font-vt323), monospace', fontSize: 'clamp(1rem, 3vw, 1.2rem)' }}>
+                <span className="text-brand-primary text-xl flex-shrink-0">{'>'}</span>
+                <span className="text-text-secondary truncate">{personalInfo.location}</span>
               </div>
-              <div className="glass px-6 py-3 rounded-full flex items-center gap-2">
-                <span className="text-brand-primary text-xl">✉️</span>
-                <span className="text-text-secondary">{personalInfo.email}</span>
+              <div className="glass px-4 sm:px-6 py-3 border-2 border-brand-primary/30 flex items-center gap-2 pixel-corners max-w-full overflow-hidden" style={{ fontFamily: 'var(--font-vt323), monospace', fontSize: 'clamp(0.9rem, 2.5vw, 1.2rem)' }}>
+                <span className="text-brand-primary text-xl flex-shrink-0">{'@'}</span>
+                <span className="text-text-secondary truncate break-all">{personalInfo.email}</span>
               </div>
             </div>
           </div>
 
-          {/* Skills Section */}
+          {/* Skills Section - Pixelated */}
           <div className="space-y-6">
             {skills.map((skillCategory, index) => (
               <div
                 key={index}
                 ref={el => skillsRefs.current[index] = el}
-                className="glass glass-hover p-6 rounded-2xl"
+                className="glass glass-hover p-6 border-2 border-brand-primary/30 pixel-corners"
               >
-                <h3 className="text-2xl font-semibold text-brand-primary mb-4 neon-text">
-                  {skillCategory.category}
+                <h3 className="text-xl font-semibold text-brand-primary mb-4 neon-text" style={{ fontFamily: 'var(--font-press-start), monospace' }}>
+                  {'[ '}{skillCategory.category.toUpperCase()}{' ]'}
                 </h3>
                 <div className="flex flex-wrap gap-3">
                   {skillCategory.items.map((skill, skillIndex) => (
                     <span
                       key={skillIndex}
-                      className="px-4 py-2 bg-bg-secondary border border-brand-primary/20 rounded-lg text-text-secondary hover:border-brand-primary hover:text-brand-primary transition-all duration-300"
+                      className="px-4 py-2 bg-bg-secondary border-2 border-brand-primary/20 text-text-secondary hover:border-brand-primary hover:text-brand-primary transition-all duration-200 pixel-corners"
+                      style={{ fontFamily: 'var(--font-vt323), monospace', fontSize: '1.1rem' }}
                     >
                       {skill}
                     </span>
@@ -146,25 +148,22 @@ export default function About() {
           </div>
         </div>
 
-        {/* Tech Stack */}
-        <div className="mt-20">
-          <h3 ref={techStackTitleRef} className="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text">
-            Tech Stack & Tools
-          </h3>
-
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-6">
+        {/* Tech Stack - Pixelated */}
+        <div className="mt-8 w-full">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-4 sm:gap-6">
             {techStack.map((tech, index) => (
               <div
                 key={index}
                 ref={el => techStackRefs.current[index] = el}
-                className="glass glass-hover p-6 rounded-xl flex flex-col items-center justify-center gap-3 group"
+                className="glass glass-hover p-6 border-2 border-brand-primary/30 flex flex-col items-center justify-center gap-3 group pixel-corners"
               >
                 <img
                   src={tech.icon}
                   alt={tech.name}
-                  className="w-12 h-12 group-hover:scale-125 transition-transform duration-300"
+                  className="w-12 h-12 group-hover:scale-110 transition-transform duration-200"
+                  style={{ imageRendering: 'pixelated' }}
                 />
-                <span className="text-sm text-text-secondary text-center group-hover:text-brand-primary transition-colors duration-300">
+                <span className="text-sm text-text-secondary text-center group-hover:text-brand-primary transition-colors duration-200" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
                   {tech.name}
                 </span>
               </div>
@@ -172,12 +171,6 @@ export default function About() {
           </div>
         </div>
       </div>
-
-      {/* Decorative Gradient with parallax */}
-      <div
-        ref={decorativeElementRef}
-        className="absolute top-1/2 left-0 w-96 h-96 bg-brand-primary opacity-5 rounded-full blur-3xl pointer-events-none"
-      ></div>
     </section>
   );
 }

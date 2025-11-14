@@ -1,15 +1,17 @@
-import { Inter, Space_Grotesk } from "next/font/google";
+import { VT323, Press_Start_2P } from "next/font/google";
 import "./globals.css";
 import "lenis/dist/lenis.css";
 
-const inter = Inter({
-  variable: "--font-geist-sans",
+const vt323 = VT323({
+  weight: "400",
+  variable: "--font-vt323",
   subsets: ["latin"],
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const pressStart2P = Press_Start_2P({
+  weight: "400",
+  variable: "--font-press-start",
   subsets: ["latin"],
   display: "swap",
 });
@@ -30,7 +32,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
+        className={`${vt323.variable} ${pressStart2P.variable}`}
       >
         {children}
       </body>

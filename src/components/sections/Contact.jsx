@@ -81,20 +81,20 @@ export default function Contact() {
     <section
       ref={contactRef}
       id="contact"
-      className="relative min-h-screen py-32 px-6 md:px-12 z-content flex items-center justify-center"
+      className="relative pt-32 pb-32 px-4 sm:px-6 md:px-12 z-content overflow-hidden"
     >
-      <div className="container mx-auto max-w-4xl text-center">
-        {/* Section Title */}
-        <div className="mb-8">
-          <h2 ref={titleRef} className="text-5xl md:text-6xl lg:text-7xl font-bold gradient-text mb-4">
-            Let's Connect
+      <div className="container mx-auto max-w-4xl w-full text-center">
+        {/* Section Title - Pixelated */}
+        <div ref={titleRef} className="mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4" style={{ fontFamily: 'var(--font-press-start), monospace' }}>
+            {'< CONTACT />'}
           </h2>
-          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary rounded-full mx-auto"></div>
+          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary mx-auto"></div>
         </div>
 
         {/* Subtitle */}
-        <p ref={subtitleRef} className="text-xl md:text-2xl text-text-secondary mb-16 max-w-2xl mx-auto">
-          I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+        <p ref={subtitleRef} className="text-xl md:text-2xl text-text-secondary mb-16 max-w-2xl mx-auto" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
+          {'> '} I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
         </p>
 
         {/* Social Links Grid */}
@@ -157,11 +157,11 @@ export default function Contact() {
       {/* Decorative Elements with parallax */}
       <div
         ref={el => decorativeElementsRef.current[0] = el}
-        className="absolute top-1/4 left-10 w-80 h-80 bg-brand-primary opacity-10 rounded-full blur-3xl animate-pulse-glow pointer-events-none"
+        className="hidden lg:block absolute top-1/4 left-10 w-48 lg:w-80 h-48 lg:h-80 bg-brand-primary opacity-10 rounded-full blur-3xl animate-pulse-glow pointer-events-none -z-10"
       ></div>
       <div
         ref={el => decorativeElementsRef.current[1] = el}
-        className="absolute bottom-1/4 right-10 w-80 h-80 bg-brand-tertiary opacity-10 rounded-full blur-3xl animate-pulse-glow pointer-events-none"
+        className="hidden lg:block absolute bottom-1/4 right-10 w-48 lg:w-80 h-48 lg:h-80 bg-brand-tertiary opacity-10 rounded-full blur-3xl animate-pulse-glow pointer-events-none -z-10"
         style={{ animationDelay: '1s' }}
       ></div>
     </section>

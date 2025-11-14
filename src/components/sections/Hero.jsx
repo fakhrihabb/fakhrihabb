@@ -2,15 +2,13 @@
 
 import { personalInfo } from '@/data/portfolio';
 import { useEffect, useRef } from 'react';
-import { textReveal, parallax } from '@/utils/scrollAnimations';
 import gsap from 'gsap';
+import TypingAnimation from '@/components/effects/TypingAnimation';
 
 export default function Hero() {
   const heroRef = useRef(null);
   const titleRef = useRef(null);
   const buttonsRef = useRef(null);
-  const scrollIndicatorRef = useRef(null);
-  const floatingElementsRef = useRef([]);
 
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
@@ -24,10 +22,6 @@ export default function Hero() {
     }
   };
 
-  const scrollToAbout = () => {
-    scrollToSection('about');
-  };
-
   useEffect(() => {
     if (!heroRef.current) return;
 
@@ -37,29 +31,10 @@ export default function Hero() {
     // Set initial states
     if (titleRef.current) gsap.set(titleRef.current, { opacity: 0, y: 30 });
     if (buttonsRef.current) gsap.set(buttonsRef.current, { opacity: 0, y: 15 });
-    if (scrollIndicatorRef.current) gsap.set(scrollIndicatorRef.current, { opacity: 0, y: 15 });
 
     // Animate in sequence with consistent faster durations
     if (titleRef.current) tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
     if (buttonsRef.current) tl.to(buttonsRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2');
-    if (scrollIndicatorRef.current) tl.to(scrollIndicatorRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2');
-
-    // Parallax effect for floating elements
-    if (floatingElementsRef.current.length > 0) {
-      floatingElementsRef.current.forEach((el, index) => {
-        if (el) {
-          parallax(el, {
-            speed: 0.2 + (index * 0.05),
-            direction: 'vertical',
-            scrollTrigger: {
-              trigger: heroRef.current,
-              start: 'top top',
-              end: 'bottom top',
-            },
-          });
-        }
-      });
-    }
 
     // Cleanup
     return () => {
@@ -68,66 +43,46 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center z-content overflow-hidden">
-      <div className="container mx-auto px-6 md:px-12 max-w-7xl">
-        <div className="text-center space-y-8">
-          {/* Main Title */}
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center z-content overflow-hidden pixel-bg">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 max-w-7xl w-full">
+        <div className="text-center space-y-8 max-w-full">
+          {/* Main Title - Pixelated Matrix Style */}
           <h1
             ref={titleRef}
-            className="text-6xl md:text-8xl lg:text-9xl font-bold"
-            style={{ fontFamily: 'var(--font-space-grotesk), sans-serif' }}
+            className="text-5xl md:text-7xl lg:text-8xl font-bold pixel-corners"
+            style={{ fontFamily: 'var(--font-press-start), monospace' }}
           >
-            <span className="block gradient-text animate-gradient">
+            <span className="block gradient-text animate-gradient tracking-wider leading-relaxed">
               {personalInfo.name}
             </span>
           </h1>
 
-          {/* CTA Buttons */}
-          <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
-            <div data-animation="fadeInLeft">
+          {/* Typing Animation - Code-like messages */}
+          <TypingAnimation />
+
+          {/* CTA Buttons - Pixelated Style */}
+          <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center pt-8 w-full px-4">
+            <div data-animation="fadeInLeft" className="w-full sm:w-auto">
               <button
                 onClick={() => scrollToSection('projects')}
-                className="glass glass-hover px-8 py-4 rounded-full text-lg font-medium text-text-primary transition-all duration-300 hover:scale-105"
+                className="glass glass-hover px-4 sm:px-8 py-3 sm:py-4 text-lg font-medium text-text-primary transition-all border-2 border-brand-primary w-full sm:w-auto whitespace-nowrap"
+                style={{ fontFamily: 'var(--font-vt323), monospace', fontSize: 'clamp(0.9rem, 3.5vw, 1.5rem)' }}
               >
-                View My Work
+                [ VIEW_PROJECTS ]
               </button>
             </div>
-            <div data-animation="fadeInRight">
+            <div data-animation="fadeInRight" className="w-full sm:w-auto">
               <button
                 onClick={() => scrollToSection('contact')}
-                className="px-8 py-4 rounded-full text-lg font-medium bg-brand-primary text-bg-primary transition-all duration-300 hover:bg-brand-secondary hover:scale-105 neon-glow"
+                className="px-4 sm:px-8 py-3 sm:py-4 text-lg font-medium bg-brand-primary text-bg-primary transition-all border-2 border-brand-primary hover:bg-brand-secondary neon-glow w-full sm:w-auto whitespace-nowrap"
+                style={{ fontFamily: 'var(--font-vt323), monospace', fontSize: 'clamp(0.9rem, 3.5vw, 1.5rem)' }}
               >
-                Get In Touch
+                [ CONNECT ]
               </button>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <div
-        ref={scrollIndicatorRef}
-        className="absolute bottom-12 left-1/2 transform -translate-x-1/2 cursor-pointer"
-        onClick={scrollToAbout}
-      >
-        <div className="flex flex-col items-center gap-2 animate-float">
-          <span className="text-sm text-text-secondary uppercase tracking-wider">Scroll</span>
-          <div className="w-6 h-10 border-2 border-brand-primary rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-3 bg-brand-primary rounded-full animate-pulse"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* Decorative Elements with parallax */}
-      <div
-        ref={el => floatingElementsRef.current[0] = el}
-        className="absolute top-1/4 left-10 w-32 h-32 bg-brand-primary opacity-10 rounded-full blur-3xl animate-pulse-glow pointer-events-none"
-      ></div>
-      <div
-        ref={el => floatingElementsRef.current[1] = el}
-        className="absolute bottom-1/4 right-10 w-40 h-40 bg-brand-tertiary opacity-10 rounded-full blur-3xl animate-pulse-glow pointer-events-none"
-        style={{ animationDelay: '1s' }}
-      ></div>
     </section>
   );
 }
