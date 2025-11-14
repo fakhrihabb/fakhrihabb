@@ -39,37 +39,21 @@ export default function Contact() {
   useEffect(() => {
     if (!contactRef.current) return;
 
-    // Animate section title with consistent faster delays
-    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.1 });
-    
-    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.15 });
-    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.2 });
+    // Animate section title
+    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.05, duration: 0.4 });
+    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.1, duration: 0.4 });
+    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.15, duration: 0.4 });
 
-    // Simple fade-in for social links
-    setTimeout(() => {
-      socialLinksRef.current.forEach((ref, index) => {
-        if (ref) {
-          fadeInUp(ref, { delay: index * 0.05 });
-        }
-      });
-    }, 250);
-
-    // Animate CTA section with fade-in
-    if (ctaRef.current) {
-      fadeInUp(ctaRef.current, {
-        delay: 0.4,
-      });
+    // Animate social links
+    const validLinks = socialLinksRef.current.filter(Boolean);
+    if (validLinks.length > 0) {
+      staggerReveal(validLinks, { stagger: 0.08, delay: 0.2, duration: 0.4 });
     }
 
-    // Parallax effects for decorative elements
-    decorativeElementsRef.current.forEach((element, index) => {
-      if (element) {
-        parallax(element, {
-          speed: 0.2 + (index * 0.05),
-          direction: index % 2 === 0 ? 'vertical' : 'horizontal',
-        });
-      }
-    });
+    // Animate CTA
+    if (ctaRef.current) {
+      fadeInUp(ctaRef.current, { delay: 0.35, duration: 0.4 });
+    }
 
     // Cleanup
     return () => {
@@ -101,7 +85,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16 max-w-3xl mx-auto">
           {socialLinks.map((social, index) => (
             <a
-              key={index}
+              key={`contact-${social.name}`}
               ref={el => socialLinksRef.current[index] = el}
               href={social.url}
               target="_blank"

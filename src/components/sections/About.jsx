@@ -18,39 +18,26 @@ export default function About() {
   useEffect(() => {
     if (!aboutRef.current) return;
 
-    // Animate section title with consistent faster delays
-    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.1 });
-    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.15 });
+    // Animate section title
+    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.05, duration: 0.4 });
+    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.1, duration: 0.4 });
 
     // Animate bio section
-    if (bioRef.current) fadeInLeft(bioRef.current, { delay: 0.2 });
+    if (bioRef.current) fadeInLeft(bioRef.current, { delay: 0.15, duration: 0.4 });
 
     // Animate contact info
-    if (contactInfoRef.current) fadeInRight(contactInfoRef.current, { delay: 0.25 });
+    if (contactInfoRef.current) fadeInRight(contactInfoRef.current, { delay: 0.2, duration: 0.4 });
 
-    // Animate skills sections with reduced delay
-    skillsRefs.current.forEach((ref, index) => {
-      if (ref) fadeInUp(ref, { delay: 0.3 + (index * 0.05) });
-    });
+    // Animate skills sections
+    const validSkills = skillsRefs.current.filter(Boolean);
+    if (validSkills.length > 0) {
+      staggerReveal(validSkills, { stagger: 0.08, delay: 0.25, duration: 0.4 });
+    }
 
-    // Animate tech stack title
-    if (techStackTitleRef.current) fadeInUp(techStackTitleRef.current, { delay: 0.4 });
-
-    // Simple fade-in for tech stack items
-    setTimeout(() => {
-      techStackRefs.current.forEach((ref, index) => {
-        if (ref) {
-          fadeInUp(ref, { delay: index * 0.03 });
-        }
-      });
-    }, 450);
-
-    // Parallax effect for decorative element
-    if (decorativeElementRef.current) {
-      parallax(decorativeElementRef.current, {
-        speed: 0.2,
-        direction: 'horizontal',
-      });
+    // Animate tech stack items
+    const validTechStack = techStackRefs.current.filter(Boolean);
+    if (validTechStack.length > 0) {
+      staggerReveal(validTechStack, { stagger: 0.02, delay: 0.35, duration: 0.4 });
     }
 
     // Cleanup
@@ -125,7 +112,7 @@ export default function About() {
           <div className="space-y-6">
             {skills.map((skillCategory, index) => (
               <div
-                key={index}
+                key={skillCategory.category}
                 ref={el => skillsRefs.current[index] = el}
                 className="glass glass-hover p-6 border-2 border-brand-primary/30 pixel-corners"
               >
@@ -133,9 +120,9 @@ export default function About() {
                   {'[ '}{skillCategory.category.toUpperCase()}{' ]'}
                 </h3>
                 <div className="flex flex-wrap gap-3">
-                  {skillCategory.items.map((skill, skillIndex) => (
+                  {skillCategory.items.map((skill) => (
                     <span
-                      key={skillIndex}
+                      key={skill}
                       className="px-4 py-2 bg-bg-secondary border-2 border-brand-primary/20 text-text-secondary hover:border-brand-primary hover:text-brand-primary transition-all duration-200 pixel-corners"
                       style={{ fontFamily: 'var(--font-vt323), monospace', fontSize: '1.1rem' }}
                     >
@@ -153,7 +140,7 @@ export default function About() {
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-4 sm:gap-6">
             {techStack.map((tech, index) => (
               <div
-                key={index}
+                key={tech.name}
                 ref={el => techStackRefs.current[index] = el}
                 className="glass glass-hover p-6 border-2 border-brand-primary/30 flex flex-col items-center justify-center gap-3 group pixel-corners"
               >

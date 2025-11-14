@@ -9,6 +9,7 @@ if (typeof window !== 'undefined') {
   gsap.config({
     nullTargetWarn: false,
     trialWarn: false,
+    force3D: true,
   });
   
   // Optimize ScrollTrigger performance
@@ -16,6 +17,7 @@ if (typeof window !== 'undefined') {
     autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
     ignoreMobileResize: true,
     limitCallbacks: true,
+    syncInterval: 150, // Reduce sync frequency
   });
 }
 
@@ -27,9 +29,9 @@ export const fadeInUp = (element, options = {}) => {
   
   const {
     delay = 0,
-    duration = 0.5,
-    y = 60,
-    ease = 'power3.out',
+    duration = 0.4,
+    y = 40,
+    ease = 'power2.out',
     scrollTrigger = {},
     stagger,
   } = options;
@@ -42,11 +44,12 @@ export const fadeInUp = (element, options = {}) => {
       delay,
       ease,
       stagger,
+      force3D: true,
       scrollTrigger: {
         trigger: element,
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play none none reverse',
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+        once: true, // Only animate once for performance
         ...scrollTrigger,
       },
     });
@@ -66,9 +69,9 @@ export const fadeInLeft = (element, options = {}) => {
   
   const {
     delay = 0,
-    duration = 0.5,
-    x = -60,
-    ease = 'power3.out',
+    duration = 0.4,
+    x = -40,
+    ease = 'power2.out',
     scrollTrigger = {},
     stagger,
   } = options;
@@ -81,15 +84,15 @@ export const fadeInLeft = (element, options = {}) => {
       delay,
       ease,
       stagger,
+      force3D: true,
       scrollTrigger: {
         trigger: element,
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play none none reverse',
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+        once: true,
         ...scrollTrigger,
       },
     });
-
 
     return animation;
   } catch (error) {
@@ -106,9 +109,9 @@ export const fadeInRight = (element, options = {}) => {
   
   const {
     delay = 0,
-    duration = 0.5,
-    x = 60,
-    ease = 'power3.out',
+    duration = 0.4,
+    x = 40,
+    ease = 'power2.out',
     scrollTrigger = {},
     stagger,
   } = options;
@@ -121,15 +124,15 @@ export const fadeInRight = (element, options = {}) => {
       delay,
       ease,
       stagger,
+      force3D: true,
       scrollTrigger: {
         trigger: element,
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play none none reverse',
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+        once: true,
         ...scrollTrigger,
       },
     });
-
 
     return animation;
   } catch (error) {
@@ -296,14 +299,14 @@ export const staggerReveal = (elements, options = {}) => {
   
   const {
     delay = 0,
-    duration = 0.5,
-    stagger = 0.1,
-    y = 30,
+    duration = 0.4,
+    stagger = 0.08,
+    y = 25,
     rotation = 0,
     scale = 1,
-    ease = 'power3.out',
+    ease = 'power2.out',
     scrollTrigger = {},
-    from = 'start', // 'start', 'center', 'end', 'random'
+    from = 'start',
   } = options;
 
   try {
@@ -314,6 +317,7 @@ export const staggerReveal = (elements, options = {}) => {
       scale,
       duration,
       delay,
+      force3D: true,
       stagger: {
         each: stagger,
         from,
@@ -321,13 +325,12 @@ export const staggerReveal = (elements, options = {}) => {
       ease,
       scrollTrigger: {
         trigger: elements[0] || elements,
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play none none reverse',
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+        once: true,
         ...scrollTrigger,
       },
     });
-
 
     return animation;
   } catch (error) {

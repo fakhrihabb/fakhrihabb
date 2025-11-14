@@ -16,34 +16,23 @@ export default function Experience() {
   useEffect(() => {
     if (!experienceRef.current) return;
 
-    // Animate section title and subtitle with consistent faster delays
-    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.1 });
-    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.15 });
-    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.2 });
+    // Animate section title
+    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.05, duration: 0.4 });
+    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.1, duration: 0.4 });
 
-    // Animate timeline line with simple fade-in
+    // Animate timeline line
     if (timelineLineRef.current) {
-      fadeInUp(timelineLineRef.current, { delay: 0.25 });
+      fadeInUp(timelineLineRef.current, { delay: 0.15, duration: 0.4 });
     }
 
-    // Animate timeline items with simpler stagger effect
-    if (timelineItemsRef.current.length > 0) {
-      const validItems = timelineItemsRef.current.filter(Boolean);
+    // Animate timeline items
+    const validItems = timelineItemsRef.current.filter(Boolean);
+    if (validItems.length > 0) {
       staggerReveal(validItems, {
-        stagger: 0.1,
-        y: 30,
-        delay: 0.3,
-        scrollTrigger: {
-          start: 'top 85%',
-        },
-      });
-    }
-
-    // Parallax effect for decorative element
-    if (decorativeElementRef.current) {
-      parallax(decorativeElementRef.current, {
-        speed: 0.2,
-        direction: 'vertical',
+        stagger: 0.12,
+        y: 25,
+        delay: 0.2,
+        duration: 0.4,
       });
     }
 

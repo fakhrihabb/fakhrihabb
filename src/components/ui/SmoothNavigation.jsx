@@ -26,50 +26,57 @@ export default function SmoothNavigation() {
     gsap.set(navRef.current, { y: -100, opacity: 0 });
     gsap.set(navItemsRef.current, { y: -20, opacity: 0 });
 
-    // Show navigation after scroll
-    const showNavigation = () => {
-      if (!isNavVisible && window.scrollY > window.innerHeight * 0.5) {
-        setIsNavVisible(true);
-        gsap.to(navRef.current, { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' });
-        gsap.to(navItemsRef.current, { 
-          y: 0, 
-          opacity: 1, 
-          duration: 0.6, 
-          ease: 'power3.out',
-          stagger: 0.05,
-          delay: 0.2,
-        });
-      } else if (isNavVisible && window.scrollY < window.innerHeight * 0.5) {
-        setIsNavVisible(false);
-        gsap.to(navRef.current, { y: -100, opacity: 0, duration: 0.4, ease: 'power3.in' });
-      }
-    };
+    let scrollTimeout;
+    let lastScrollY = window.scrollY;
 
-    // Track active section
-    const updateActiveSection = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
-      
-      for (const section of sections) {
-        const element = document.getElementById(section.id);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section.id);
-            break;
+    // Throttled scroll handler
+    const handleScroll = () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const currentScrollY = window.scrollY;
+        
+        // Show/hide navigation
+        if (!isNavVisible && currentScrollY > window.innerHeight * 0.5) {
+          setIsNavVisible(true);
+          gsap.to(navRef.current, { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' });
+          gsap.to(navItemsRef.current, { 
+            y: 0, 
+            opacity: 1, 
+            duration: 0.5, 
+            ease: 'power2.out',
+            stagger: 0.04,
+            delay: 0.15,
+          });
+        } else if (isNavVisible && currentScrollY < window.innerHeight * 0.5) {
+          setIsNavVisible(false);
+          gsap.to(navRef.current, { y: -100, opacity: 0, duration: 0.3, ease: 'power2.in' });
+        }
+
+        // Update active section
+        const scrollPosition = currentScrollY + window.innerHeight / 2;
+        
+        for (const section of sections) {
+          const element = document.getElementById(section.id);
+          if (element) {
+            const { offsetTop, offsetHeight } = element;
+            
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+              setActiveSection(section.id);
+              break;
+            }
           }
         }
-      }
+        
+        lastScrollY = currentScrollY;
+      }, 100); // Throttle to 100ms
     };
 
-    window.addEventListener('scroll', showNavigation);
-    window.addEventListener('scroll', updateActiveSection);
-    showNavigation();
-    updateActiveSection();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
 
     return () => {
-      window.removeEventListener('scroll', showNavigation);
-      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
     };
   }, [isNavVisible]);
 

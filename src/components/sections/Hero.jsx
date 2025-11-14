@@ -25,20 +25,20 @@ export default function Hero() {
   useEffect(() => {
     if (!heroRef.current) return;
 
-    // Initial animations on mount - faster and simpler
-    const tl = gsap.timeline();
+    // Initial animations on mount
+    const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
 
     // Set initial states
-    if (titleRef.current) gsap.set(titleRef.current, { opacity: 0, y: 30 });
-    if (buttonsRef.current) gsap.set(buttonsRef.current, { opacity: 0, y: 15 });
+    if (titleRef.current) gsap.set(titleRef.current, { opacity: 0, y: 25 });
+    if (buttonsRef.current) gsap.set(buttonsRef.current, { opacity: 0, y: 10 });
 
-    // Animate in sequence with consistent faster durations
-    if (titleRef.current) tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
-    if (buttonsRef.current) tl.to(buttonsRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2');
+    // Animate in sequence
+    if (titleRef.current) tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.5 });
+    if (buttonsRef.current) tl.to(buttonsRef.current, { opacity: 1, y: 0, duration: 0.5 }, '-=0.3');
 
     // Cleanup
     return () => {
-      // GSAP animations will be cleaned up by the SmoothScrollProvider
+      tl.kill();
     };
   }, []);
 

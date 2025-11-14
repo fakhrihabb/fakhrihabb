@@ -96,9 +96,9 @@ export default function Footer() {
               [ CONNECT ]
             </h4>
             <div className="flex gap-4">
-              {socialLinks.map((social, index) => (
+              {socialLinks.map((social) => (
                 <a
-                  key={index}
+                  key={`footer-${social.name}`}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"

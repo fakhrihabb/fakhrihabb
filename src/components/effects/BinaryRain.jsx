@@ -4,70 +4,87 @@ import { useEffect, useRef } from 'react';
 
 export default function BinaryRain() {
   const canvasRef = useRef(null);
+  const animationFrameRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
-
-    // Set canvas size
+    const ctx = canvas.getContext('2d', { alpha: false });
+    
+    // Set canvas size with device pixel ratio for sharpness
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = Math.min(window.devicePixelRatio, 2); // Cap at 2x for performance
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      ctx.scale(dpr, dpr);
     };
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    
+    let resizeTimeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(resizeCanvas, 250);
+    };
+    window.addEventListener('resize', handleResize);
 
-    // Matrix rain configuration - more dense for better effect
-    const fontSize = 16;
-    const columns = Math.floor(canvas.width / fontSize);
-    const drops = Array(columns).fill(1).map(() => Math.random() * -100);
+    // Reduce column count for performance
+    const fontSize = 20;
+    const columns = Math.floor(window.innerWidth / fontSize);
+    const drops = new Array(columns).fill(0).map(() => Math.random() * -50);
 
-    // Characters - binary only for true matrix aesthetic
-    const chars = '01';
-    const matrixChars = chars.split('');
+    // Pre-calculate characters
+    const matrixChars = ['0', '1'];
 
-    // Animation
-    const draw = () => {
-      // Semi-transparent black to create fade effect
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    let lastTime = 0;
+    const fps = 30; // Reduce from 60fps to 30fps
+    const interval = 1000 / fps;
 
-      // Set font with pixelated style
+    // Animation with requestAnimationFrame
+    const draw = (currentTime) => {
+      animationFrameRef.current = requestAnimationFrame(draw);
+      
+      const deltaTime = currentTime - lastTime;
+      if (deltaTime < interval) return;
+      
+      lastTime = currentTime - (deltaTime % interval);
+
+      // Fade effect
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
       ctx.font = `bold ${fontSize}px monospace`;
 
-      for (let i = 0; i < drops.length; i++) {
-        // Random character
-        const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-
-        // Calculate position
+      // Batch draw operations
+      for (let i = 0; i < columns; i++) {
+        const text = matrixChars[Math.floor(Math.random() * 2)];
         const x = i * fontSize;
         const y = drops[i] * fontSize;
 
-        // Gradient effect - varying brightness for depth
-        const brightness = Math.random() * 80 + 175;
+        // Simplified brightness
+        const brightness = Math.random() > 0.5 ? 255 : 200;
         ctx.fillStyle = `rgb(${brightness}, ${brightness}, ${brightness})`;
-
-        // Draw character
         ctx.fillText(text, x, y);
 
-        // Reset drop randomly with varying frequency
-        if (y > canvas.height && Math.random() > 0.98) {
+        // Reset drop
+        if (y > window.innerHeight && Math.random() > 0.98) {
           drops[i] = 0;
         }
 
-        // Move drop with slight speed variation
-        drops[i] += 0.5 + Math.random() * 0.3;
+        drops[i] += 0.7;
       }
     };
 
-    // Animation loop - smoother 60fps
-    const interval = setInterval(draw, 50); // Adjusted for better performance
+    animationFrameRef.current = requestAnimationFrame(draw);
 
     return () => {
-      clearInterval(interval);
-      window.removeEventListener('resize', resizeCanvas);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      clearTimeout(resizeTimeout);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -75,7 +92,7 @@ export default function BinaryRain() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 z-background pointer-events-none"
-      style={{ opacity: 0.3 }}
+      style={{ opacity: 0.3, willChange: 'auto' }}
     />
   );
 }

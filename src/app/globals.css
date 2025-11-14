@@ -78,7 +78,7 @@ body {
   image-rendering: crisp-edges;
 }
 
-/* Scanline effect overlay */
+/* Scanline effect overlay - optimized */
 body::before {
   content: "";
   position: fixed;
@@ -88,34 +88,15 @@ body::before {
   height: 100%;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.15),
-    rgba(0, 0, 0, 0.15) 1px,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.1) 1px,
     transparent 1px,
-    transparent 2px
+    transparent 3px
   );
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.3;
-}
-
-/* CRT screen flicker */
-@keyframes flicker {
-  0% { opacity: 0.97; }
-  50% { opacity: 1; }
-  100% { opacity: 0.97; }
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.02);
-  pointer-events: none;
-  z-index: 9998;
-  animation: flicker 0.15s infinite;
+  opacity: 0.25;
+  will-change: auto;
 }
 
 /* Performance optimizations for animations */
@@ -124,13 +105,12 @@ body::after {
 }
 
 .animate-on-scroll {
-  will-change: transform, opacity;
+  will-change: auto;
 }
 
 .gpu-accelerated {
   transform: translateZ(0);
   backface-visibility: hidden;
-  perspective: 1000;
 }
 
 /* Reduce motion for users who prefer it */
@@ -147,21 +127,21 @@ body::after {
 /* Glassmorphism Utilities - Pixelated */
 .glass {
   background: var(--glass-bg);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
   border: 2px solid var(--glass-border);
-  box-shadow: var(--shadow-elevation);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
   image-rendering: pixelated;
 }
 
 .glass-hover {
-  transition: all 0.2s steps(4);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .glass-hover:hover {
   background: rgba(18, 18, 18, 0.95);
   border-color: var(--brand-primary);
-  box-shadow: var(--glow-primary), var(--shadow-elevation);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 4px 16px rgba(0, 0, 0, 0.6);
   transform: translateY(-2px);
 }
 
@@ -200,26 +180,21 @@ body::after {
   border-top: none;
 }
 
-/* White Glow Effects */
+/* White Glow Effects - Optimized */
 .neon-text {
   color: var(--brand-primary);
-  text-shadow:
-    0 0 10px rgba(255, 255, 255, 0.8),
-    0 0 20px rgba(255, 255, 255, 0.6),
-    0 0 30px rgba(255, 255, 255, 0.4);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
   font-family: var(--font-press-start), monospace;
   letter-spacing: 2px;
 }
 
 .neon-border {
   border: 2px solid var(--brand-primary);
-  box-shadow:
-    0 0 10px rgba(255, 255, 255, 0.5),
-    inset 0 0 10px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
 }
 
 .neon-glow {
-  box-shadow: var(--glow-primary);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
 /* Gradient Effects - Monochrome */
@@ -229,7 +204,6 @@ body::after {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: var(--font-press-start), monospace;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 .gradient-border {
@@ -277,10 +251,10 @@ body::after {
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
   }
   50% {
-    box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
   }
 }
 
@@ -298,7 +272,7 @@ body::after {
 }
 
 .animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+  animation: pulse-glow 3s ease-in-out infinite;
 }
 
 .animate-gradient {
@@ -356,28 +330,26 @@ img, video, canvas, svg {
 @keyframes matrix-fade {
   0% {
     opacity: 0;
-    transform: scale(0.5);
+    transform: scale(0.7);
   }
-  15% {
+  20% {
     opacity: 1;
     transform: scale(1);
   }
   100% {
     opacity: 0;
-    transform: scale(1.5);
+    transform: scale(1.3);
   }
 }
 
 .matrix-trail {
-  animation: matrix-fade 1.2s ease-out forwards;
+  animation: matrix-fade 1s ease-out forwards;
 }
 
 .matrix-number {
   color: var(--brand-primary);
-  text-shadow:
-    0 0 5px rgba(255, 255, 255, 0.8),
-    0 0 10px rgba(255, 255, 255, 0.6);
-  animation: matrix-fade 1.2s ease-out forwards;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+  animation: matrix-fade 1s ease-out forwards;
   font-family: var(--font-vt323), monospace;
 }
 
