@@ -128,7 +128,7 @@ export default function Footer() {
 
           <div className="flex items-center gap-6">
             <p className="text-text-muted text-lg" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
-              {'> BUILT_WITH: NEXT.JS + GSAP'}
+              {'> BUILT_WITH: NEXT.JS + REACT + GSAP + TAILWIND'}
             </p>
             <button
               onClick={scrollToTop}
