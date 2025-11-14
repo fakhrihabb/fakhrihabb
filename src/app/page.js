@@ -4,6 +4,7 @@ import ScrollProgress from '@/components/ui/ScrollProgress';
 import SmoothNavigation from '@/components/ui/SmoothNavigation';
 import BinaryRain from '@/components/effects/BinaryRain';
 import MatrixCursor from '@/components/effects/MatrixCursor';
+import ScanLine from '@/components/effects/ScanLine';
 import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
 import Experience from '@/components/sections/Experience';
@@ -19,6 +20,9 @@ export default function Home() {
 
       {/* Matrix Cursor Effect */}
       <MatrixCursor />
+
+      {/* OCR Scan Line Effect - On top of everything */}
+      <ScanLine />
 
       {/* Navigation & Progress Indicators */}
       <SmoothNavigation />
