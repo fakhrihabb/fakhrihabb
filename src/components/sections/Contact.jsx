@@ -96,10 +96,10 @@ export default function Contact() {
                 {iconMap[social.icon]}
               </div>
               <div className="text-left flex-1">
-                <h3 className="text-lg font-semibold text-text-primary group-hover:text-brand-primary transition-colors duration-300">
+                <h3 className="text-xl font-semibold text-text-primary group-hover:text-brand-primary transition-colors duration-300">
                   {social.name}
                 </h3>
-                <p className="text-sm text-text-secondary">{social.handle}</p>
+                <p className="text-lg text-text-secondary" style={{ fontFamily: 'var(--font-vt323), monospace' }}>{social.handle}</p>
               </div>
               <svg
                 className="w-5 h-5 text-brand-primary transform group-hover:translate-x-1 transition-transform duration-300"
@@ -123,7 +123,7 @@ export default function Contact() {
           <h3 className="text-2xl font-bold text-text-primary mb-4">
             Feel like chatting?
           </h3>
-          <p className="text-text-secondary mb-6">
+          <p className="text-text-secondary text-xl mb-6" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
             Feel free to reach out via email or any of the platforms above!
           </p>
           <a

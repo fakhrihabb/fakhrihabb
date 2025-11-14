@@ -83,7 +83,7 @@ export default function Projects() {
                 </h3>
 
                 {/* Description */}
-                <p className="text-text-secondary text-sm leading-relaxed">
+                <p className="text-text-secondary text-xl leading-relaxed" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
                   {project.description}
                 </p>
 
@@ -92,7 +92,8 @@ export default function Projects() {
                   {project.technologies.map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className="px-3 py-1 bg-bg-tertiary border border-brand-primary/30 rounded-md text-xs text-text-secondary hover:border-brand-primary hover:text-brand-primary transition-all duration-300"
+                      className="px-3 py-1 bg-bg-tertiary border border-brand-primary/30 rounded-md text-base text-text-secondary hover:border-brand-primary hover:text-brand-primary transition-all duration-300"
+                      style={{ fontFamily: 'var(--font-vt323), monospace' }}
                     >
                       {tech}
                     </span>
@@ -104,13 +105,14 @@ export default function Projects() {
                   {project.link !== "#" && (
                     <a
                       href={project.link}
-                      className="flex items-center gap-2 text-sm text-brand-primary hover:text-brand-secondary transition-colors duration-300 group/link"
+                      className="flex items-center gap-2 text-lg text-brand-primary hover:text-brand-secondary transition-colors duration-300 group/link"
+                      style={{ fontFamily: 'var(--font-vt323), monospace' }}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <span>View Project</span>
                       <svg
-                        className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-300"
+                        className="w-5 h-5 transform group-hover/link:translate-x-1 transition-transform duration-300"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -128,12 +130,13 @@ export default function Projects() {
                   {project.github !== "#" && (
                     <a
                       href={project.github}
-                      className="flex items-center gap-2 text-sm text-text-secondary hover:text-brand-primary transition-colors duration-300"
+                      className="flex items-center gap-2 text-lg text-text-secondary hover:text-brand-primary transition-colors duration-300"
+                      style={{ fontFamily: 'var(--font-vt323), monospace' }}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <svg
-                        className="w-4 h-4"
+                        className="w-5 h-5"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
