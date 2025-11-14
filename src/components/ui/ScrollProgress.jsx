@@ -24,10 +24,13 @@ export default function ScrollProgress() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-1 bg-bg-secondary/20 z-50">
+    <div className="fixed top-0 left-0 w-full h-2 bg-bg-secondary/40 z-50">
       <div
         ref={progressBarRef}
-        className="h-full bg-gradient-to-r from-brand-primary to-brand-tertiary origin-left"
+        className="h-full bg-brand-primary origin-left"
+        style={{
+          boxShadow: '0 0 10px rgba(255, 255, 255, 0.8)'
+        }}
       ></div>
     </div>
   );

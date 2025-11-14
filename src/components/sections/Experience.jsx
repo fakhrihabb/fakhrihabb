@@ -16,34 +16,23 @@ export default function Experience() {
   useEffect(() => {
     if (!experienceRef.current) return;
 
-    // Animate section title and subtitle with consistent faster delays
-    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.1 });
-    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.15 });
-    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.2 });
+    // Animate section title
+    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.05, duration: 0.4 });
+    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.1, duration: 0.4 });
 
-    // Animate timeline line with simple fade-in
+    // Animate timeline line
     if (timelineLineRef.current) {
-      fadeInUp(timelineLineRef.current, { delay: 0.25 });
+      fadeInUp(timelineLineRef.current, { delay: 0.15, duration: 0.4 });
     }
 
-    // Animate timeline items with simpler stagger effect
-    if (timelineItemsRef.current.length > 0) {
-      const validItems = timelineItemsRef.current.filter(Boolean);
+    // Animate timeline items
+    const validItems = timelineItemsRef.current.filter(Boolean);
+    if (validItems.length > 0) {
       staggerReveal(validItems, {
-        stagger: 0.1,
-        y: 30,
-        delay: 0.3,
-        scrollTrigger: {
-          start: 'top 85%',
-        },
-      });
-    }
-
-    // Parallax effect for decorative element
-    if (decorativeElementRef.current) {
-      parallax(decorativeElementRef.current, {
-        speed: 0.2,
-        direction: 'vertical',
+        stagger: 0.12,
+        y: 25,
+        delay: 0.2,
+        duration: 0.4,
       });
     }
 
@@ -57,18 +46,15 @@ export default function Experience() {
     <section
       ref={experienceRef}
       id="experience"
-      className="relative min-h-screen py-32 px-6 md:px-12 z-content"
+      className="relative pt-32 pb-32 px-4 sm:px-6 md:px-12 z-content overflow-hidden"
     >
-      <div className="container mx-auto max-w-6xl">
-        {/* Section Title */}
-        <div className="mb-20 text-center">
-          <h2 ref={titleRef} className="text-5xl md:text-6xl font-bold gradient-text mb-4">
-            Experience
+      <div className="container mx-auto max-w-6xl w-full">
+        {/* Section Title - Pixelated */}
+        <div ref={titleRef} className="mb-16 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4" style={{ fontFamily: 'var(--font-press-start), monospace' }}>
+            {'< EXPERIENCE />'}
           </h2>
-          <p ref={subtitleRef} className="text-xl text-text-secondary mt-4">
-            My journey through internships and organizations
-          </p>
-          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary rounded-full mx-auto mt-6"></div>
+          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary mx-auto"></div>
         </div>
 
         {/* Timeline */}
@@ -93,10 +79,10 @@ export default function Experience() {
                 <div className="w-full md:w-5/12 glass glass-hover p-6 rounded-2xl">
                   {/* Type Badge */}
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 bg-brand-primary/20 border border-brand-primary rounded-full text-xs font-semibold text-brand-primary uppercase tracking-wider">
+                    <span className="px-3 py-1 bg-brand-primary/20 border border-brand-primary rounded-full text-base font-semibold text-brand-primary uppercase tracking-wider" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
                       {exp.type}
                     </span>
-                    <span className="text-sm text-text-muted">{exp.duration}</span>
+                    <span className="text-lg text-text-muted" style={{ fontFamily: 'var(--font-vt323), monospace' }}>{exp.duration}</span>
                   </div>
 
                   {/* Title & Organization */}
@@ -108,14 +94,15 @@ export default function Experience() {
                   </p>
 
                   {/* Period */}
-                  <p className="text-sm text-text-muted mb-4">{exp.period}</p>
+                  <p className="text-lg text-text-muted mb-4" style={{ fontFamily: 'var(--font-vt323), monospace' }}>{exp.period}</p>
 
                   {/* Description */}
                   <ul className="space-y-2">
                     {exp.description.map((desc, descIndex) => (
                       <li
                         key={descIndex}
-                        className="text-text-secondary text-sm flex gap-2"
+                        className="text-text-secondary text-xl flex gap-2"
+                        style={{ fontFamily: 'var(--font-vt323), monospace' }}
                       >
                         <span className="text-brand-primary mt-1">▹</span>
                         <span>{desc}</span>
@@ -128,7 +115,8 @@ export default function Experience() {
                     {exp.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-3 py-1 bg-bg-tertiary border border-brand-primary/30 rounded-md text-xs text-text-secondary"
+                        className="px-3 py-1 bg-bg-tertiary border border-brand-primary/30 rounded-md text-base text-text-secondary"
+                        style={{ fontFamily: 'var(--font-vt323), monospace' }}
                       >
                         {tech}
                       </span>
@@ -160,7 +148,7 @@ export default function Experience() {
       {/* Decorative Elements with parallax */}
       <div
         ref={decorativeElementRef}
-        className="absolute top-1/3 right-0 w-80 h-80 bg-brand-secondary opacity-5 rounded-full blur-3xl pointer-events-none"
+        className="hidden lg:block absolute top-1/3 right-0 w-48 lg:w-80 h-48 lg:h-80 bg-brand-secondary opacity-5 rounded-full blur-3xl pointer-events-none -z-10"
       ></div>
     </section>
   );

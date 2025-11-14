@@ -16,29 +16,15 @@ export default function Projects() {
   useEffect(() => {
     if (!projectsRef.current) return;
 
-    // Animate section title and subtitle with consistent faster delays
-    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.1 });
-    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.15 });
-    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.2 });
+    // Animate section title
+    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.05, duration: 0.4 });
+    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.1, duration: 0.4 });
 
-    // Simple fade-in for project cards
-    setTimeout(() => {
-      projectCardsRef.current.forEach((ref, index) => {
-        if (ref) {
-          fadeInUp(ref, { delay: index * 0.05 });
-        }
-      });
-    }, 250);
-
-    // Parallax effects for decorative elements
-    decorativeElementsRef.current.forEach((element, index) => {
-      if (element) {
-        parallax(element, {
-          speed: 0.15 + (index * 0.05),
-          direction: index % 2 === 0 ? 'vertical' : 'horizontal',
-        });
-      }
-    });
+    // Animate project cards
+    const validCards = projectCardsRef.current.filter(Boolean);
+    if (validCards.length > 0) {
+      staggerReveal(validCards, { stagger: 0.1, delay: 0.15, duration: 0.4 });
+    }
 
     // Cleanup
     return () => {
@@ -50,18 +36,15 @@ export default function Projects() {
     <section
       ref={projectsRef}
       id="projects"
-      className="relative min-h-screen py-32 px-6 md:px-12 z-content"
+      className="relative pt-32 pb-32 px-4 sm:px-6 md:px-12 z-content overflow-hidden"
     >
-      <div className="container mx-auto max-w-7xl">
-        {/* Section Title */}
-        <div className="mb-20 text-center">
-          <h2 ref={titleRef} className="text-5xl md:text-6xl font-bold gradient-text mb-4">
-            Featured Projects
+      <div className="container mx-auto max-w-7xl w-full">
+        {/* Section Title - Pixelated */}
+        <div ref={titleRef} className="mb-16 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4" style={{ fontFamily: 'var(--font-press-start), monospace' }}>
+            {'< PROJECTS />'}
           </h2>
-          <p ref={subtitleRef} className="text-xl text-text-secondary mt-4">
-            A showcase of my recent work and contributions
-          </p>
-          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary rounded-full mx-auto mt-6"></div>
+          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary mx-auto"></div>
         </div>
 
         {/* Projects Grid */}
@@ -100,7 +83,7 @@ export default function Projects() {
                 </h3>
 
                 {/* Description */}
-                <p className="text-text-secondary text-sm leading-relaxed">
+                <p className="text-text-secondary text-xl leading-relaxed" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
                   {project.description}
                 </p>
 
@@ -109,7 +92,8 @@ export default function Projects() {
                   {project.technologies.map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className="px-3 py-1 bg-bg-tertiary border border-brand-primary/30 rounded-md text-xs text-text-secondary hover:border-brand-primary hover:text-brand-primary transition-all duration-300"
+                      className="px-3 py-1 bg-bg-tertiary border border-brand-primary/30 rounded-md text-base text-text-secondary hover:border-brand-primary hover:text-brand-primary transition-all duration-300"
+                      style={{ fontFamily: 'var(--font-vt323), monospace' }}
                     >
                       {tech}
                     </span>
@@ -121,13 +105,14 @@ export default function Projects() {
                   {project.link !== "#" && (
                     <a
                       href={project.link}
-                      className="flex items-center gap-2 text-sm text-brand-primary hover:text-brand-secondary transition-colors duration-300 group/link"
+                      className="flex items-center gap-2 text-lg text-brand-primary hover:text-brand-secondary transition-colors duration-300 group/link"
+                      style={{ fontFamily: 'var(--font-vt323), monospace' }}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <span>View Project</span>
                       <svg
-                        className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-300"
+                        className="w-5 h-5 transform group-hover/link:translate-x-1 transition-transform duration-300"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -145,12 +130,13 @@ export default function Projects() {
                   {project.github !== "#" && (
                     <a
                       href={project.github}
-                      className="flex items-center gap-2 text-sm text-text-secondary hover:text-brand-primary transition-colors duration-300"
+                      className="flex items-center gap-2 text-lg text-text-secondary hover:text-brand-primary transition-colors duration-300"
+                      style={{ fontFamily: 'var(--font-vt323), monospace' }}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <svg
-                        className="w-4 h-4"
+                        className="w-5 h-5"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -172,11 +158,11 @@ export default function Projects() {
       {/* Decorative Elements with parallax */}
       <div
         ref={el => decorativeElementsRef.current[0] = el}
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-primary opacity-5 rounded-full blur-3xl pointer-events-none"
+        className="hidden lg:block absolute top-1/4 left-1/4 w-64 lg:w-96 h-64 lg:h-96 bg-brand-primary opacity-5 rounded-full blur-3xl pointer-events-none -z-10"
       ></div>
       <div
         ref={el => decorativeElementsRef.current[1] = el}
-        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-tertiary opacity-5 rounded-full blur-3xl pointer-events-none"
+        className="hidden lg:block absolute bottom-1/4 right-1/4 w-64 lg:w-96 h-64 lg:h-96 bg-brand-tertiary opacity-5 rounded-full blur-3xl pointer-events-none -z-10"
       ></div>
     </section>
   );

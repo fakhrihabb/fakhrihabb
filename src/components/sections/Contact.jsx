@@ -39,37 +39,21 @@ export default function Contact() {
   useEffect(() => {
     if (!contactRef.current) return;
 
-    // Animate section title with consistent faster delays
-    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.1 });
-    
-    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.15 });
-    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.2 });
+    // Animate section title
+    if (titleRef.current) fadeInUp(titleRef.current, { delay: 0.05, duration: 0.4 });
+    if (titleLineRef.current) fadeInUp(titleLineRef.current, { delay: 0.1, duration: 0.4 });
+    if (subtitleRef.current) fadeInUp(subtitleRef.current, { delay: 0.15, duration: 0.4 });
 
-    // Simple fade-in for social links
-    setTimeout(() => {
-      socialLinksRef.current.forEach((ref, index) => {
-        if (ref) {
-          fadeInUp(ref, { delay: index * 0.05 });
-        }
-      });
-    }, 250);
-
-    // Animate CTA section with fade-in
-    if (ctaRef.current) {
-      fadeInUp(ctaRef.current, {
-        delay: 0.4,
-      });
+    // Animate social links
+    const validLinks = socialLinksRef.current.filter(Boolean);
+    if (validLinks.length > 0) {
+      staggerReveal(validLinks, { stagger: 0.08, delay: 0.2, duration: 0.4 });
     }
 
-    // Parallax effects for decorative elements
-    decorativeElementsRef.current.forEach((element, index) => {
-      if (element) {
-        parallax(element, {
-          speed: 0.2 + (index * 0.05),
-          direction: index % 2 === 0 ? 'vertical' : 'horizontal',
-        });
-      }
-    });
+    // Animate CTA
+    if (ctaRef.current) {
+      fadeInUp(ctaRef.current, { delay: 0.35, duration: 0.4 });
+    }
 
     // Cleanup
     return () => {
@@ -81,27 +65,27 @@ export default function Contact() {
     <section
       ref={contactRef}
       id="contact"
-      className="relative min-h-screen py-32 px-6 md:px-12 z-content flex items-center justify-center"
+      className="relative pt-32 pb-32 px-4 sm:px-6 md:px-12 z-content overflow-hidden"
     >
-      <div className="container mx-auto max-w-4xl text-center">
-        {/* Section Title */}
-        <div className="mb-8">
-          <h2 ref={titleRef} className="text-5xl md:text-6xl lg:text-7xl font-bold gradient-text mb-4">
-            Let's Connect
+      <div className="container mx-auto max-w-4xl w-full text-center">
+        {/* Section Title - Pixelated */}
+        <div ref={titleRef} className="mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4" style={{ fontFamily: 'var(--font-press-start), monospace' }}>
+            {'< CONTACT />'}
           </h2>
-          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary rounded-full mx-auto"></div>
+          <div ref={titleLineRef} className="w-24 h-1 bg-brand-primary mx-auto"></div>
         </div>
 
         {/* Subtitle */}
-        <p ref={subtitleRef} className="text-xl md:text-2xl text-text-secondary mb-16 max-w-2xl mx-auto">
-          I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+        <p ref={subtitleRef} className="text-xl md:text-2xl text-text-secondary mb-16 max-w-2xl mx-auto" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
+          {'> '} I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
         </p>
 
         {/* Social Links Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16 max-w-3xl mx-auto">
           {socialLinks.map((social, index) => (
             <a
-              key={index}
+              key={`contact-${social.name}`}
               ref={el => socialLinksRef.current[index] = el}
               href={social.url}
               target="_blank"
@@ -112,10 +96,10 @@ export default function Contact() {
                 {iconMap[social.icon]}
               </div>
               <div className="text-left flex-1">
-                <h3 className="text-lg font-semibold text-text-primary group-hover:text-brand-primary transition-colors duration-300">
+                <h3 className="text-xl font-semibold text-text-primary group-hover:text-brand-primary transition-colors duration-300">
                   {social.name}
                 </h3>
-                <p className="text-sm text-text-secondary">{social.handle}</p>
+                <p className="text-lg text-text-secondary" style={{ fontFamily: 'var(--font-vt323), monospace' }}>{social.handle}</p>
               </div>
               <svg
                 className="w-5 h-5 text-brand-primary transform group-hover:translate-x-1 transition-transform duration-300"
@@ -139,7 +123,7 @@ export default function Contact() {
           <h3 className="text-2xl font-bold text-text-primary mb-4">
             Feel like chatting?
           </h3>
-          <p className="text-text-secondary mb-6">
+          <p className="text-text-secondary text-xl mb-6" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
             Feel free to reach out via email or any of the platforms above!
           </p>
           <a
@@ -157,11 +141,11 @@ export default function Contact() {
       {/* Decorative Elements with parallax */}
       <div
         ref={el => decorativeElementsRef.current[0] = el}
-        className="absolute top-1/4 left-10 w-80 h-80 bg-brand-primary opacity-10 rounded-full blur-3xl animate-pulse-glow pointer-events-none"
+        className="hidden lg:block absolute top-1/4 left-10 w-48 lg:w-80 h-48 lg:h-80 bg-brand-primary opacity-10 rounded-full blur-3xl animate-pulse-glow pointer-events-none -z-10"
       ></div>
       <div
         ref={el => decorativeElementsRef.current[1] = el}
-        className="absolute bottom-1/4 right-10 w-80 h-80 bg-brand-tertiary opacity-10 rounded-full blur-3xl animate-pulse-glow pointer-events-none"
+        className="hidden lg:block absolute bottom-1/4 right-10 w-48 lg:w-80 h-48 lg:h-80 bg-brand-tertiary opacity-10 rounded-full blur-3xl animate-pulse-glow pointer-events-none -z-10"
         style={{ animationDelay: '1s' }}
       ></div>
     </section>

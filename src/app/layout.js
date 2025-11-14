@@ -1,25 +1,28 @@
-import { Inter, Space_Grotesk } from "next/font/google";
+import { VT323, Press_Start_2P } from "next/font/google";
 import "./globals.css";
+import "lenis/dist/lenis.css";
 
-const inter = Inter({
-  variable: "--font-geist-sans",
+const vt323 = VT323({
+  weight: "400",
+  variable: "--font-vt323",
   subsets: ["latin"],
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const pressStart2P = Press_Start_2P({
+  weight: "400",
+  variable: "--font-press-start",
   subsets: ["latin"],
   display: "swap",
 });
 
 export const metadata = {
-  title: "Fakhri Habibi | Information Systems Student",
+  title: "Fakhri Habibi | Portfolio",
   description: "Portfolio of Fakhri Habibi - Information Systems student specializing in Software Engineering and Project Management. Explore my projects, experience, and skills.",
   keywords: ["portfolio", "information systems", "software engineering", "project management", "web development"],
   authors: [{ name: "Fakhri Habibi" }],
   openGraph: {
-    title: "Fakhri Habibi | Information Systems Student",
+    title: "Fakhri Habibi | Portfolio",
     description: "Portfolio showcasing software engineering and project management expertise",
     type: "website",
   },
@@ -29,7 +32,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
+        className={`${vt323.variable} ${pressStart2P.variable}`}
       >
         {children}
       </body>

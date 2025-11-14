@@ -9,11 +9,13 @@ export default function SmoothNavigation() {
   const navItemsRef = useRef([]);
   const [activeSection, setActiveSection] = useState('hero');
   const [isNavVisible, setIsNavVisible] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
 
   const sections = [
     { id: 'hero', label: 'Home' },
     { id: 'about', label: 'About' },
+    { id: 'wins', label: 'Wins' },
     { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' },
@@ -26,134 +28,150 @@ export default function SmoothNavigation() {
     gsap.set(navRef.current, { y: -100, opacity: 0 });
     gsap.set(navItemsRef.current, { y: -20, opacity: 0 });
 
-    // Show navigation after scroll
-    const showNavigation = () => {
-      if (!isNavVisible && window.scrollY > window.innerHeight * 0.5) {
-        setIsNavVisible(true);
-        gsap.to(navRef.current, { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' });
-        gsap.to(navItemsRef.current, { 
-          y: 0, 
-          opacity: 1, 
-          duration: 0.6, 
-          ease: 'power3.out',
-          stagger: 0.05,
-          delay: 0.2,
-        });
-      } else if (isNavVisible && window.scrollY < window.innerHeight * 0.5) {
-        setIsNavVisible(false);
-        gsap.to(navRef.current, { y: -100, opacity: 0, duration: 0.4, ease: 'power3.in' });
-      }
-    };
+    let scrollTimeout;
+    let lastScrollY = window.scrollY;
 
-    // Track active section
-    const updateActiveSection = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
-      
-      for (const section of sections) {
-        const element = document.getElementById(section.id);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section.id);
-            break;
+    // Throttled scroll handler
+    const handleScroll = () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const currentScrollY = window.scrollY;
+        
+        // Show/hide navigation
+        if (!isNavVisible && currentScrollY > window.innerHeight * 0.5) {
+          setIsNavVisible(true);
+          gsap.to(navRef.current, { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' });
+          gsap.to(navItemsRef.current, { 
+            y: 0, 
+            opacity: 1, 
+            duration: 0.5, 
+            ease: 'power2.out',
+            stagger: 0.04,
+            delay: 0.15,
+          });
+        } else if (isNavVisible && currentScrollY < window.innerHeight * 0.5) {
+          setIsNavVisible(false);
+          gsap.to(navRef.current, { y: -100, opacity: 0, duration: 0.3, ease: 'power2.in' });
+        }
+
+        // Update active section
+        const scrollPosition = currentScrollY + window.innerHeight / 2;
+        
+        for (const section of sections) {
+          const element = document.getElementById(section.id);
+          if (element) {
+            const { offsetTop, offsetHeight } = element;
+            
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+              setActiveSection(section.id);
+              break;
+            }
           }
         }
-      }
+        
+        lastScrollY = currentScrollY;
+      }, 100); // Throttle to 100ms
     };
 
-    window.addEventListener('scroll', showNavigation);
-    window.addEventListener('scroll', updateActiveSection);
-    showNavigation();
-    updateActiveSection();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
 
     return () => {
-      window.removeEventListener('scroll', showNavigation);
-      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
     };
   }, [isNavVisible]);
 
   const scrollToSection = (sectionId) => {
+    // Close mobile menu when navigating
+    setIsMobileMenuOpen(false);
+    
     // Special case for 'hero' section - scroll to top of page
     if (sectionId === 'hero') {
-      if (window.getLenis) {
-        const lenis = window.getLenis();
-        lenis.scrollTo(0, {
-          duration: 1.5,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-        });
-      } else {
-        // Fallback to native smooth scrolling
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    
+
     const section = document.getElementById(sectionId);
     if (section) {
-      // Use Lenis for smooth scrolling if available
-      if (window.getLenis) {
-        const lenis = window.getLenis();
-        lenis.scrollTo(section, {
-          offset: -80, // Account for fixed nav height
-          duration: 1.5,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-        });
-      } else {
-        // Fallback to native smooth scrolling
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      const navHeight = 80; // Account for fixed nav height
+      const targetPosition = section.offsetTop - navHeight;
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
   return (
-    <nav 
+    <nav
       ref={navRef}
-      className="fixed top-0 left-0 right-0 z-50 glass border-b border-brand-primary/10"
+      className="fixed top-0 left-0 right-0 z-50 glass border-b-2 border-brand-primary/30 pixel-bg w-full"
     >
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="text-2xl font-bold gradient-text cursor-pointer" onClick={() => scrollToSection('hero')}>
-            FH
+      <div className="max-w-7xl mx-auto px-3 md:px-6 py-3 md:py-4 w-full">
+        <div className="flex items-center justify-between gap-2 w-full">
+          {/* Logo - Pixelated Style */}
+          <div
+            className="text-sm sm:text-base md:text-2xl font-bold gradient-text cursor-pointer px-2 md:px-3 py-1 border-2 border-brand-primary/50 flex-shrink-0"
+            onClick={() => scrollToSection('hero')}
+            style={{ fontFamily: 'var(--font-press-start), monospace' }}
+          >
+            {'[ FH ]'}
           </div>
 
-          {/* Navigation Items */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Navigation Items - Retro Style */}
+          <div className="hidden md:flex items-center space-x-4 lg:space-x-6">
             {sections.map((section, index) => (
               <button
                 key={section.id}
                 ref={el => navItemsRef.current[index] = el}
                 onClick={() => scrollToSection(section.id)}
-                className={`relative text-sm font-medium transition-colors duration-300 ${
-                  activeSection === section.id 
-                    ? 'text-brand-primary' 
-                    : 'text-text-secondary hover:text-text-primary'
+                className={`relative text-lg font-medium transition-colors duration-200 px-3 py-1 border border-transparent ${
+                  activeSection === section.id
+                    ? 'text-brand-primary border-brand-primary neon-glow'
+                    : 'text-text-secondary hover:text-text-primary hover:border-brand-primary/50'
                 }`}
+                style={{ fontFamily: 'var(--font-vt323), monospace' }}
               >
-                {section.label}
-                
-                {/* Active indicator */}
-                {activeSection === section.id && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-brand-primary rounded-full"></span>
-                )}
+                {activeSection === section.id ? `> ${section.label.toUpperCase()}` : section.label.toUpperCase()}
               </button>
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden text-brand-primary"
-            onClick={() => {
-              // For mobile, you might want to implement a mobile menu
-              scrollToSection('about');
-            }}
+          {/* Mobile Menu Button - Pixelated */}
+          <button
+            className="md:hidden text-brand-primary border-2 border-brand-primary p-1.5 md:p-2 flex-shrink-0"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
+              {isMobileMenuOpen ? (
+                <path strokeLinecap="square" strokeLinejoin="miter" d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="square" strokeLinejoin="miter" d="M4 6h16M4 12h16M4 18h16" />
+              )}
             </svg>
           </button>
         </div>
+
+        {/* Mobile Menu - Dropdown */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-3 border-t-2 border-brand-primary/30 pt-3 space-y-2">
+            {sections.map((section) => (
+              <button
+                key={section.id}
+                onClick={() => scrollToSection(section.id)}
+                className={`block w-full text-left text-lg font-medium transition-colors duration-200 px-3 py-2 border border-transparent ${
+                  activeSection === section.id
+                    ? 'text-brand-primary border-brand-primary neon-glow bg-brand-primary/10'
+                    : 'text-text-secondary hover:text-text-primary hover:border-brand-primary/50'
+                }`}
+                style={{ fontFamily: 'var(--font-vt323), monospace' }}
+              >
+                {activeSection === section.id ? `> ${section.label.toUpperCase()}` : section.label.toUpperCase()}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </nav>
   );

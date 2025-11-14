@@ -33,108 +33,118 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative py-12 px-6 md:px-12 z-content border-t border-brand-primary/10">
-      <div className="container mx-auto max-w-7xl">
+    <footer className="relative py-12 px-4 sm:px-6 md:px-12 z-content border-t-4 border-brand-primary pixel-bg overflow-hidden">
+      <div className="container mx-auto max-w-7xl w-full">
         {/* Main Footer Content */}
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           {/* Brand Section */}
           <div className="space-y-4">
             <h3
               className="text-2xl font-bold gradient-text"
-              style={{ fontFamily: 'var(--font-space-grotesk), sans-serif' }}
+              style={{ fontFamily: 'var(--font-press-start), monospace' }}
             >
               {personalInfo.name}
             </h3>
-            <p className="text-text-secondary text-sm">
-              {personalInfo.tagline}
+            <p className="text-text-secondary text-lg" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
+              {'> '}{personalInfo.tagline}
             </p>
-            <p className="text-text-muted text-sm">
-              {personalInfo.location}
+            <p className="text-text-muted text-lg" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
+              {'> '}{personalInfo.location}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-brand-primary">Quick Links</h4>
+            <h4 className="text-xl font-semibold text-brand-primary" style={{ fontFamily: 'var(--font-press-start), monospace' }}>
+              [ LINKS ]
+            </h4>
             <nav className="flex flex-col gap-2">
               <a
                 href="#about"
-                className="text-text-secondary hover:text-brand-primary transition-colors duration-300 text-sm"
+                className="text-text-secondary hover:text-brand-primary transition-colors duration-200 text-lg"
+                style={{ fontFamily: 'var(--font-vt323), monospace' }}
               >
-                About
+                {'> ABOUT'}
               </a>
               <a
                 href="#experience"
-                className="text-text-secondary hover:text-brand-primary transition-colors duration-300 text-sm"
+                className="text-text-secondary hover:text-brand-primary transition-colors duration-200 text-lg"
+                style={{ fontFamily: 'var(--font-vt323), monospace' }}
               >
-                Experience
+                {'> EXPERIENCE'}
               </a>
               <a
                 href="#projects"
-                className="text-text-secondary hover:text-brand-primary transition-colors duration-300 text-sm"
+                className="text-text-secondary hover:text-brand-primary transition-colors duration-200 text-lg"
+                style={{ fontFamily: 'var(--font-vt323), monospace' }}
               >
-                Projects
+                {'> PROJECTS'}
               </a>
               <a
                 href="#contact"
-                className="text-text-secondary hover:text-brand-primary transition-colors duration-300 text-sm"
+                className="text-text-secondary hover:text-brand-primary transition-colors duration-200 text-lg"
+                style={{ fontFamily: 'var(--font-vt323), monospace' }}
               >
-                Contact
+                {'> CONTACT'}
               </a>
             </nav>
           </div>
 
           {/* Social Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-brand-primary">Connect</h4>
+            <h4 className="text-xl font-semibold text-brand-primary" style={{ fontFamily: 'var(--font-press-start), monospace' }}>
+              [ CONNECT ]
+            </h4>
             <div className="flex gap-4">
-              {socialLinks.map((social, index) => (
+              {socialLinks.map((social) => (
                 <a
-                  key={index}
+                  key={`footer-${social.name}`}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center bg-bg-secondary border border-brand-primary/20 rounded-lg text-text-secondary hover:border-brand-primary hover:text-brand-primary hover:bg-brand-primary/10 transition-all duration-300 hover:scale-110"
+                  className="w-12 h-12 flex items-center justify-center bg-bg-secondary border-2 border-brand-primary/40 text-text-secondary hover:border-brand-primary hover:text-brand-primary hover:bg-brand-primary/10 transition-all duration-200 hover:scale-110 pixel-corners neon-glow"
                   aria-label={social.name}
                 >
                   {iconMap[social.icon]}
                 </a>
               ))}
             </div>
-            <p className="text-text-muted text-sm mt-4">
-              Open to opportunities and collaborations
+            <p className="text-text-muted text-lg mt-4" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
+              {'> STATUS: OPEN_FOR_OPPORTUNITIES'}
             </p>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-brand-primary/30 to-transparent mb-8"></div>
+        {/* Divider - Pixelated */}
+        <div className="w-full h-1 bg-brand-primary/30 mb-8" style={{
+          backgroundImage: 'repeating-linear-gradient(90deg, var(--brand-primary) 0px, var(--brand-primary) 4px, transparent 4px, transparent 8px)'
+        }}></div>
 
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-text-muted text-sm">
-            © {currentYear} {personalInfo.name}. All rights reserved.
+          <p className="text-text-muted text-lg" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
+            {'© '}{currentYear} {personalInfo.name}{' // ALL_RIGHTS_RESERVED'}
           </p>
 
           <div className="flex items-center gap-6">
-            <p className="text-text-muted text-xs">
-              Built with Next.js, Three.js, GSAP & Lenis
+            <p className="text-text-muted text-lg" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
+              {'> BUILT_WITH: NEXT.JS + REACT + GSAP + TAILWIND'}
             </p>
             <button
               onClick={scrollToTop}
-              className="w-10 h-10 flex items-center justify-center bg-brand-primary/10 border border-brand-primary rounded-lg text-brand-primary hover:bg-brand-primary hover:text-bg-primary transition-all duration-300 hover:scale-110"
+              className="w-12 h-12 flex items-center justify-center bg-brand-primary/10 border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-bg-primary transition-all duration-200 hover:scale-110 pixel-corners neon-glow"
               aria-label="Scroll to top"
             >
               <svg
-                className="w-5 h-5"
+                className="w-6 h-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                strokeWidth={3}
               >
                 <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
+                  strokeLinecap="square"
+                  strokeLinejoin="miter"
                   d="M5 10l7-7m0 0l7 7m-7-7v18"
                 />
               </svg>
@@ -143,8 +153,10 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Decorative Gradient */}
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-brand-primary to-transparent"></div>
+      {/* Decorative Gradient - Pixelated */}
+      <div className="absolute bottom-0 left-0 w-full h-1" style={{
+        backgroundImage: 'repeating-linear-gradient(90deg, transparent 0px, transparent 4px, var(--brand-primary) 4px, var(--brand-primary) 8px)'
+      }}></div>
     </footer>
   );
 }
