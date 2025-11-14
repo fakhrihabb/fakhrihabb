@@ -7,6 +7,7 @@ import SmoothNavigation from '@/components/ui/SmoothNavigation';
 import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
 import Experience from '@/components/sections/Experience';
+import Wins from '@/components/sections/Wins';
 import Projects from '@/components/sections/Projects';
 import Contact from '@/components/sections/Contact';
 import Footer from '@/components/sections/Footer';
@@ -53,6 +54,7 @@ export default function Home() {
       <main className="relative">
         <Hero />
         <About />
+        <Wins />
         <Experience />
         <Projects />
         <Contact />
