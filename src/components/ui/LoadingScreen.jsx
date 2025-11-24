@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { GridScan } from '@/components/GridScan';
 
 export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
@@ -71,6 +72,28 @@ export default function LoadingScreen() {
         progress === 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
+      {/* GridScan 3D Background */}
+      <div className="absolute inset-0">
+        <GridScan
+          lineThickness={1}
+          gridScale={0.1}
+          lineJitter={0}
+          scanGlow={1}
+          scanSoftness={2}
+          enablePost={true}
+          chromaticAberration={0}
+          noiseIntensity={0.04}
+          enableWebcam={false}
+          linesColor="#6b7280"
+          scanColor="#d1d5db"
+          scanOpacity={1}
+          scanDuration={2.0}
+          scanDelay={2.0}
+          bloomIntensity={0}
+          lineStyle="solid"
+        />
+      </div>
+
       {/* Matrix falling characters background */}
       <div className="absolute inset-0 overflow-hidden">
         {matrixChars.map((item) => (
