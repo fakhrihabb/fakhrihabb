@@ -8,6 +8,7 @@ export default function LoadingScreen() {
   const [progress, setProgress] = useState(0);
   const [loadingText, setLoadingText] = useState('');
   const [matrixChars, setMatrixChars] = useState([]);
+  const [shouldUnmount, setShouldUnmount] = useState(false);
 
   const messages = [
     'INITIALIZING SYSTEM...',
@@ -46,6 +47,10 @@ export default function LoadingScreen() {
         // Wait a moment before fading out
         setTimeout(() => {
           setIsLoading(false);
+          // Unmount GridScan after fade out completes
+          setTimeout(() => {
+            setShouldUnmount(true);
+          }, 700);
         }, 800);
       }
 
@@ -62,7 +67,7 @@ export default function LoadingScreen() {
     return () => clearInterval(progressInterval);
   }, []);
 
-  if (!isLoading) {
+  if (shouldUnmount) {
     return null;
   }
 
@@ -72,27 +77,29 @@ export default function LoadingScreen() {
         progress === 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
-      {/* GridScan 3D Background */}
-      <div className="absolute inset-0">
-        <GridScan
-          lineThickness={1}
-          gridScale={0.1}
-          lineJitter={0}
-          scanGlow={1}
-          scanSoftness={2}
-          enablePost={true}
-          chromaticAberration={0}
-          noiseIntensity={0.04}
-          enableWebcam={false}
-          linesColor="#6b7280"
-          scanColor="#d1d5db"
-          scanOpacity={1}
-          scanDuration={2.0}
-          scanDelay={2.0}
-          bloomIntensity={0}
-          lineStyle="solid"
-        />
-      </div>
+      {/* GridScan 3D Background - Only render when loading */}
+      {isLoading && (
+        <div className="absolute inset-0">
+          <GridScan
+            lineThickness={1}
+            gridScale={0.1}
+            lineJitter={0}
+            scanGlow={1}
+            scanSoftness={2}
+            enablePost={true}
+            chromaticAberration={0}
+            noiseIntensity={0.04}
+            enableWebcam={false}
+            linesColor="#6b7280"
+            scanColor="#d1d5db"
+            scanOpacity={1}
+            scanDuration={2.0}
+            scanDelay={2.0}
+            bloomIntensity={0}
+            lineStyle="solid"
+          />
+        </div>
+      )}
 
       {/* Matrix falling characters background */}
       <div className="absolute inset-0 overflow-hidden">
