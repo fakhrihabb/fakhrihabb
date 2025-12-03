@@ -46,12 +46,12 @@ export default function Wins() {
         </div>
 
         {/* Wins Grid */}
-        <div className="grid md:grid-cols-3 gap-8 items-stretch">
+        <div className="flex flex-wrap gap-8 justify-center items-stretch">
           {wins.slice().reverse().map((win, index) => (
             <div
               key={win.id}
               ref={el => winCardsRef.current[index] = el}
-              className="group glass glass-hover rounded-2xl overflow-hidden relative flex flex-col h-full"
+              className="group glass glass-hover rounded-2xl overflow-hidden relative flex flex-col h-full w-full md:w-[calc(33.333%-1.5rem)] max-w-md md:max-w-none"
               style={{ transform: 'none' }}
             >
               {/* Win Image */}
@@ -70,78 +70,78 @@ export default function Wins() {
               {/* Content */}
               <div className="p-6 space-y-4 flex flex-col flex-grow">
 
-              {/* Rank Badge */}
-              <div className="flex justify-center">
-                <span className="px-3 py-1 bg-brand-primary/20 border-2 border-brand-primary text-sm font-bold text-brand-primary uppercase tracking-wider rounded-full" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
-                  {win.rank}
-                </span>
-              </div>
+                {/* Rank Badge */}
+                <div className="flex justify-center">
+                  <span className="px-3 py-1 bg-brand-primary/20 border-2 border-brand-primary text-sm font-bold text-brand-primary uppercase tracking-wider rounded-full" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
+                    {win.rank}
+                  </span>
+                </div>
 
-              {/* Competition Name */}
-              <h3 className="text-2xl font-bold text-text-primary text-center group-hover:text-brand-primary transition-colors duration-300">
-                {win.competition}
-              </h3>
+                {/* Competition Name */}
+                <h3 className="text-2xl font-bold text-text-primary text-center group-hover:text-brand-primary transition-colors duration-300">
+                  {win.competition}
+                </h3>
 
-              {/* Organizer */}
-              <p className="text-lg text-text-secondary text-center" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
-                {win.organizer}
-              </p>
+                {/* Organizer */}
+                <p className="text-lg text-text-secondary text-center" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
+                  {win.organizer}
+                </p>
 
-              {/* Date */}
-              <p className="text-lg text-text-tertiary text-center" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
-                {win.date}
-              </p>
+                {/* Date */}
+                <p className="text-lg text-text-tertiary text-center" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
+                  {win.date}
+                </p>
 
-              {/* Description */}
-              <p className="text-xl text-text-secondary leading-relaxed text-center pt-4 flex-grow" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
-                {win.description}
-              </p>
+                {/* Description */}
+                <p className="text-xl text-text-secondary leading-relaxed text-center pt-4 flex-grow" style={{ fontFamily: 'var(--font-vt323), monospace' }}>
+                  {win.description}
+                </p>
 
-              {/* Technologies/Categories */}
-              {win.categories && (
-                <div className="flex flex-wrap gap-2 justify-center pt-4">
-                  {win.categories.map((category, catIndex) => (
-                    <span
-                      key={catIndex}
-                      className="px-3 py-1 bg-bg-tertiary border border-brand-primary/30 rounded-md text-base text-text-secondary hover:border-brand-primary hover:text-brand-primary transition-all duration-300"
+                {/* Technologies/Categories */}
+                {win.categories && (
+                  <div className="flex flex-wrap gap-2 justify-center pt-4">
+                    {win.categories.map((category, catIndex) => (
+                      <span
+                        key={catIndex}
+                        className="px-3 py-1 bg-bg-tertiary border border-brand-primary/30 rounded-md text-base text-text-secondary hover:border-brand-primary hover:text-brand-primary transition-all duration-300"
+                        style={{ fontFamily: 'var(--font-vt323), monospace' }}
+                      >
+                        {category}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {/* Link */}
+                {win.link && win.link !== "#" && (
+                  <div className="flex justify-center pt-4">
+                    <a
+                      href={win.link}
+                      className="flex items-center gap-2 text-lg text-brand-primary hover:text-brand-secondary transition-colors duration-300 group/link"
                       style={{ fontFamily: 'var(--font-vt323), monospace' }}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      {category}
-                    </span>
-                  ))}
-                </div>
-              )}
+                      <span>View Details</span>
+                      <svg
+                        className="w-5 h-5 transform group-hover/link:translate-x-1 transition-transform duration-300"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+                )}
 
-              {/* Link */}
-              {win.link && win.link !== "#" && (
-                <div className="flex justify-center pt-4">
-                  <a
-                    href={win.link}
-                    className="flex items-center gap-2 text-lg text-brand-primary hover:text-brand-secondary transition-colors duration-300 group/link"
-                    style={{ fontFamily: 'var(--font-vt323), monospace' }}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span>View Details</span>
-                    <svg
-                      className="w-5 h-5 transform group-hover/link:translate-x-1 transition-transform duration-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              )}
-
-              {/* Neon Border Effect on Hover */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none neon-border"></div>
+                {/* Neon Border Effect on Hover */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none neon-border"></div>
               </div>
             </div>
           ))}

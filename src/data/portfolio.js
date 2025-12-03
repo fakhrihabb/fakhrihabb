@@ -127,6 +127,17 @@ export const wins = [
     categories: ["AI", "Computer Vision", "Cloud Computing"],
     link: "#",
   },
+  {
+    id: 4,
+    rank: "🥇 1st Place",
+    competition: "Digital Innovation Challenge",
+    organizer: "QRISTAL Kasuari by BI Papua Barat",
+    date: "November 2025",
+    description: "Proposed Petatas, a gamified AI-ecosystem with hyper personalized challenges designed to accelerate QRIS adoption among residents of West Papua.",
+    image: "/project-images/win-4.jpeg",
+    categories: ["Business Case", "AI", "Fintech", "Mobile App"],
+    link: "#",
+  },
 ];
 
 export const projects = [
