@@ -47,7 +47,7 @@ export default function Wins() {
 
         {/* Wins Grid */}
         <div className="grid md:grid-cols-3 gap-8 items-stretch">
-          {wins.map((win, index) => (
+          {wins.slice().reverse().map((win, index) => (
             <div
               key={win.id}
               ref={el => winCardsRef.current[index] = el}
