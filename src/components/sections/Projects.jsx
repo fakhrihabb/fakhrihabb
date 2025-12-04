@@ -49,7 +49,7 @@ export default function Projects() {
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
+          {projects.slice().reverse().map((project, index) => (
             <div
               key={project.id}
               ref={el => projectCardsRef.current[index] = el}
