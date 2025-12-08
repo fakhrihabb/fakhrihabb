@@ -1,4 +1,5 @@
 import { VT323, Press_Start_2P } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import "lenis/dist/lenis.css";
 
@@ -35,6 +36,7 @@ export default function RootLayout({ children }) {
         className={`${vt323.variable} ${pressStart2P.variable}`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
